@@ -23,6 +23,7 @@
 	"type": "module",
 	"dependencies": {
 		"@egjs/svelte-conveyer": "^1.4.8",
-		"@neodrag/svelte": "^2.0.3"
+		"@neodrag/svelte": "^2.0.3",
+		"three": "^0.150.1"
 	}
 }

@@ -8,9 +8,11 @@
     import Computation from '$lib/components/Computation.svelte';
     import Footer from '$lib/components/Footer.svelte';
     import Particles from '$lib/components/Particles.svelte';
+    import Starmap from '$lib/components/Starmap.svelte';
 </script>
 
 <main>
+    <Starmap />
     <Header />
     <Timeline />
     <Footer />
@@ -20,6 +22,11 @@
 
 <style>
     main {
+        background-color: #08090b;
+        background-image: url('$lib/assets/images/background.jpg');
+        background-repeat: no-repeat;
+        background-position: center -100px;
+
         display: flex;
         flex-direction: column;
         height: 100%;
