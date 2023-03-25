@@ -19,17 +19,27 @@
     function selectYear(year) {
         currentYear = year;
     }
+
+    function handleClickOutside() {
+        selectYear(null);
+    }
 </script>
+
+{#if currentYear}
+    {#key currentYear}
+        <Events
+            millenium={millenium.millenium}
+            year={currentYear}
+            {handleClickOutside}
+        />
+    {/key}
+{/if}
 
 <div id="timeline-slider" class="timeline-slider">
     <div id="timeline-line" class="timeline-line">
         <div class="timeline-line-inner" />
     </div>
-    {#if currentYear}
-        {#key currentYear}
-            <Events millenium={millenium.millenium} year={currentYear} />
-        {/key}
-    {/if}
+
     <div
         class="timeline-events"
         use:draggable={{ axis: 'x', defaultPosition: { x: -765 * 70 + 800 } }}
@@ -58,6 +68,7 @@
         cursor: all-scroll;
         height: 160px;
         position: relative;
+        margin-top: auto;
         margin-bottom: -20px;
     }
 
@@ -125,7 +136,7 @@
         }
 
         span {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             position: absolute;
             top: -15px;
             left: -25px;

@@ -14,7 +14,7 @@
         backdrop-filter: blur(10px);
         padding: 20px;
         //width: 70%;
-        width: 100%;
+        width: 700px;
         animation: animated 0.4s linear backwards 1;
     }
 

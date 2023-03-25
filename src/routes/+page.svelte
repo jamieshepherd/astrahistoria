@@ -1,4 +1,8 @@
 <script>
+    import '$lib/styles/ResetStyles.scss';
+    import '$lib/styles/FontStyles.scss';
+    import '$lib/styles/GlobalStyles.scss';
+
     import Timeline from '$lib/components/Timeline.svelte';
     import Header from '$lib/components/Header.svelte';
     import Computation from '$lib/components/Computation.svelte';
@@ -19,6 +23,6 @@
         display: flex;
         flex-direction: column;
         height: 100%;
-        justify-content: flex-end;
+        max-height: inherit;
     }
 </style>
