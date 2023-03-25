@@ -8,7 +8,7 @@
     import Computation from '$lib/components/Computation.svelte';
     import Footer from '$lib/components/Footer.svelte';
     import Particles from '$lib/components/Particles.svelte';
-    import Starmap from '$lib/components/Starmap.svelte';
+    import Starmap from '$lib/components/Starmap/Starmap.svelte';
 </script>
 
 <main>

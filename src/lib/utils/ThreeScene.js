@@ -51,6 +51,68 @@ export const createScene = (el) => {
     });
     resize();
     animate();
+
+    let particleSystem, uniforms, geometry;
+
+    const particles = 100000;
+
+    uniforms = {
+        pointTexture: {
+            value: new THREE.TextureLoader().load(
+                'textures/sprites/spark1.png'
+            ),
+        },
+    };
+
+    const shaderMaterial = new THREE.ShaderMaterial({
+        uniforms: uniforms,
+        vertexShader: document.getElementById('vertexshader').textContent,
+        fragmentShader: document.getElementById('fragmentshader').textContent,
+
+        blending: THREE.AdditiveBlending,
+        depthTest: false,
+        transparent: true,
+        vertexColors: true,
+    });
+
+    const radius = 200;
+
+    geometry = new THREE.BufferGeometry();
+
+    const positions = [];
+    const colors = [];
+    const sizes = [];
+
+    const color = new THREE.Color();
+
+    for (let i = 0; i < particles; i++) {
+        positions.push((Math.random() * 2 - 1) * radius);
+        positions.push((Math.random() * 2 - 1) * radius);
+        positions.push((Math.random() * 2 - 1) * radius);
+
+        color.setHSL(i / particles, 1.0, 0.5);
+
+        colors.push(color.r, color.g, color.b);
+
+        sizes.push(20);
+    }
+
+    geometry.setAttribute(
+        'position',
+        new THREE.Float32BufferAttribute(positions, 3)
+    );
+    geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+    geometry.setAttribute(
+        'size',
+        new THREE.Float32BufferAttribute(sizes, 1).setUsage(
+            THREE.DynamicDrawUsage
+        )
+    );
+
+    particleSystem = new THREE.Points(geometry, shaderMaterial);
+    scene.add(particleSystem);
+
+    return scene;
 };
 
 window.addEventListener('resize', resize);
