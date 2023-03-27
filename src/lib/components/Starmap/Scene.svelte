@@ -7,27 +7,21 @@
     const scale = spring(1);
     let rotation = 0;
     useFrame((state, delta) => {
-        rotation += delta;
+        rotation += delta / 8;
     });
 </script>
 
 <T.PerspectiveCamera
     makeDefault
-    position={[10, 10, 10]}
+    position={[3, 3, 3]}
     on:create={({ ref }) => {
         ref.lookAt(0, 1, 0);
     }}
 />
 
-<T.DirectionalLight position={[3, 10, 7]} />
+<T.Points rotation.y={rotation} position.y={1} scale={$scale}>
+    <T.SphereBufferGeometry args={[1, 32, 32]} />
+    <T.PointsMaterial size={0.02} sizeAttenuation={true} />
+</T.Points>
 
-<T.Mesh
-    rotation.y={rotation}
-    position.y={1}
-    scale={$scale}
-    on:pointerenter={() => scale.set(1.5)}
-    on:pointerleave={() => scale.set(1)}
->
-    <T.BoxGeometry args={[1, 2, 1]} />
-    <T.MeshStandardMaterial color="hotpink" />
-</T.Mesh>
+<T.DirectionalLight position={[3, 10, 7]} />
