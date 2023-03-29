@@ -23,7 +23,7 @@
         y: -0.2,
         z: -0.2,
         galaxySeed: 1337,
-        starCount: 30000,
+        starCount: 20000,
         starSize: 0.012,
         radius: 3,
         branches: 5,
