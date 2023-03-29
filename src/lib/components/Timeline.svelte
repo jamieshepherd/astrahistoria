@@ -116,7 +116,7 @@
         text-align: center;
         opacity: 0.5;
         transition: all 0.2s;
-        transform: scale(0.9);
+        transform: scale(0.75);
         user-select: none;
 
         &.active,

@@ -35,6 +35,7 @@
         opacity: 0.65;
         padding: 30px;
         width: 100%;
+        user-select: none;
     }
 
     p {

@@ -1,33 +1,76 @@
 <script>
     import starImage from '$lib/assets/textures/star.png';
-    import { T, useFrame } from '@threlte/core';
-    import { interactivity, OrbitControls, useTexture } from '@threlte/extras';
+    import { T, useFrame, useThrelte } from '@threlte/core';
+    import {
+        OrbitControls,
+        Environment,
+        interactivity,
+        layers,
+        useTexture,
+    } from '@threlte/extras';
     import * as THREE from 'three';
+    import Segmentum from '$lib/components/Starmap/Segmentum.svelte';
 
     interactivity();
-    let rotation = 0;
-    useFrame((state, delta) => {
-        // rotation += delta / 1024;
-    });
+    layers();
 
-    const camParams = {
-        x: 2,
-        y: 2,
-        z: 2,
+    export let cursorPosition = { x: 0, y: 0 };
+    const { scene } = useThrelte();
+    scene.backgroundIntensity = 0.3;
+
+    let camBase = {
+        position: {
+            x: -0.3,
+            y: 2.5,
+            z: 0.2,
+        },
+        rotation: {
+            x: -1.5,
+            y: 0,
+            z: 0,
+        },
     };
 
+    let camPos = {
+        x: camBase.position.x,
+        y: camBase.position.y,
+        z: camBase.position.z,
+    };
+
+    let camRot = {
+        x: camBase.rotation.x,
+        y: camBase.rotation.y,
+        z: camBase.rotation.z,
+    };
     const params = {
+        x: 0.2,
+        y: -0.2,
+        z: -0.2,
         galaxySeed: 1337,
-        starCount: 50000,
-        starSize: 0.02,
-        radius: 4,
+        starCount: 30000,
+        starSize: 0.012,
+        radius: 3,
         branches: 5,
-        spin: 5,
-        starSpread: 0.5,
-        starPower: 3,
+        spin: 2,
+        starPower: 4,
         innerColor: '#ff6600',
-        outerColor: '#1b3984',
+        outerColor: '#ffffff',
+        maxPolarAngle: 5,
     };
+
+    const lerpedPosition = new THREE.Vector3();
+
+    useFrame(({ camera }, delta) => {
+        const cursor = new THREE.Vector3(
+            cursorPosition.x / window.innerWidth - 0.5,
+            cursorPosition.y / window.innerHeight - 0.5
+        );
+        lerpedPosition.lerp(cursor, delta);
+        camPos.x = camBase.position.x + Math.min(lerpedPosition.x * 0.2, 2);
+        camPos.z = camBase.position.z + Math.min(lerpedPosition.y * 0.2, 2);
+        camRot.x = camBase.rotation.x + Math.min(lerpedPosition.x * 0.2, 2);
+        camRot.y = camBase.rotation.y + Math.min(lerpedPosition.y * 0.2, 2);
+    });
 
     let bufferGeometry;
     let positions = new Float32Array(params.starCount * 3);
@@ -133,28 +176,64 @@
 
 <T.PerspectiveCamera
     makeDefault
-    position={[camParams.x, camParams.y, camParams.z]}
+    position={[camPos.x, camPos.y, camPos.z]}
+    rotation={[camRot.x, camRot.y, camRot.z]}
     fov={75}
     near={0.1}
-    far={100}
+    far={1000}
+    layers={'all'}
+    frustumCulled={false}
 >
-    <OrbitControls enableDamping />
+    <!--    <OrbitControls-->
+    <!--        enablePan={false}-->
+    <!--        enableDamping-->
+    <!--        maxPolarAngle={params.maxPolarAngle}-->
+    <!--        minDistance={2}-->
+    <!--        maxDistance={3}-->
+    <!--    />-->
 </T.PerspectiveCamera>
 
-<T.Points rotation.y={rotation} position.y={1}>
-    <T.BufferGeometry bind:ref={bufferGeometry} />
+<Environment
+    path="/env/"
+    files={[
+        'skybox_right1.png',
+        'skybox_left2.png',
+        'skybox_top3.png',
+        'skybox_bottom4.png',
+        'skybox_front5.png',
+        'skybox_back6.png',
+    ]}
+    isBackground={true}
+/>
 
-    {#await useTexture(starImage) then texture}
-        <T.PointsMaterial
-            size={params.starSize}
-            sizeAttenuation={true}
-            transparent={true}
-            alphaMap={texture}
-            depthWrite={false}
-            blending={THREE.AdditiveBlending}
-            vertexColors={true}
-        />
-    {/await}
-</T.Points>
+<T.Group position.y={params.x} position.x={params.y} position.z={params.z}>
+    <T.Points layers={1} frustumCulled={false}>
+        <T.BufferGeometry bind:ref={bufferGeometry} />
 
-<T.DirectionalLight position={[3, 10, 7]} />
+        {#await useTexture(starImage) then texture}
+            <T.PointsMaterial
+                size={params.starSize}
+                sizeAttenuation={true}
+                transparent={true}
+                alphaMap={texture}
+                depthWrite={false}
+                blending={THREE.AdditiveBlending}
+                vertexColors={true}
+            />
+        {/await}
+    </T.Points>
+
+    <T.Mesh layers={2} position.y={0} position.x={-0.5} position.z={0.5}>
+        <T.ConeGeometry args={[0.03, 0.1, 3]} />
+        <T.MeshBasicMaterial color="pink" />
+    </T.Mesh>
+
+    <T.Group
+        layers={3}
+        position.x={-0.2}
+        position.y={0}
+        rotation={[-1.5, 0.0, 0.0]}
+    >
+        <Segmentum />
+    </T.Group>
+</T.Group>

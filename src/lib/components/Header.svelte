@@ -9,11 +9,8 @@
         </li>
         <li>archive loaded...</li>
         <li>
-            <strong>the emperor protects.</strong>
-        </li>
-        <li>
+            <strong>the emperor protects. </strong>
             <div class="cursor" />
-            &nbsp;
         </li>
     </ul>
 </header>
@@ -26,17 +23,23 @@
         user-select: none;
     }
     h1 {
+        background: rgba(0, 0, 0, 0.5);
         font-size: 1.6rem;
         color: white;
+        padding: 2px 5px;
+        width: max-content;
     }
     ul {
         margin: 0;
         padding: 0;
     }
     li {
+        background: rgba(0, 0, 0, 0.5);
         font-size: 1.2rem;
         display: flex;
+        padding: 2px 5px;
         align-items: center;
+        width: max-content;
     }
     .vermillion {
         display: inline-block;
@@ -49,9 +52,11 @@
         background: rgba(255, 255, 255, 0.5);
         height: 14px;
         width: 2px;
+        display: inline-block;
         animation-name: flash;
         animation-duration: 1s;
         animation-iteration-count: infinite;
+        margin-left: 5px;
     }
 
     @keyframes flash {
