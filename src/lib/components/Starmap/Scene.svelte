@@ -168,15 +168,16 @@
     />
 </T.PerspectiveCamera>
 
+<!--Save some png space here since we don't see all the sides-->
 <Environment
     path="/env/"
     files={[
-        'skybox_right1.png',
-        'skybox_left2.png',
-        'skybox_top3.png',
-        'skybox_bottom4.png',
-        'skybox_front5.png',
-        'skybox_back6.png',
+        'skybox_right1.jpg',
+        'skybox_left2.jpg',
+        'skybox_left2.jpg',
+        'skybox_bottom4.jpg',
+        'skybox_bottom4.jpg',
+        'skybox_bottom4.jpg',
     ]}
     isBackground={true}
 />
