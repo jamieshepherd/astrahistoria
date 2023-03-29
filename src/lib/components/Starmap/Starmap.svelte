@@ -2,12 +2,14 @@
     import { Canvas } from '@threlte/core';
     import Scene from '$lib/components/Starmap/Scene.svelte';
     import PostProcessing from '$lib/components/Starmap/PostProcessing.svelte';
+    import Debug from '$lib/components/Starmap/Debug.svelte';
 </script>
 
 <div class="starmap">
     <Canvas>
         <Scene />
         <PostProcessing />
+        <!--        <Debug />-->
     </Canvas>
 </div>
 

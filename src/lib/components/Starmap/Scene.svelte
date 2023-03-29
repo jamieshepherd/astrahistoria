@@ -11,43 +11,43 @@
     } from '@threlte/extras';
     import * as THREE from 'three';
     import Segmentum from '$lib/components/Starmap/Segmentum.svelte';
-    import Storms from '$lib/components/Storms.svelte';
-    import Debug from '$lib/components/Debug.svelte';
+    import Storms from '$lib/components/Starmap/Storms.svelte';
+    import Debug from '$lib/components/Starmap/Debug.svelte';
 
     interactivity();
     layers({ defaultLayers: 0 });
 
-    const { scene } = useThrelte();
+    const { camera, scene } = useThrelte();
     scene.backgroundIntensity = 0.3;
 
     const params = {
         x: 0,
         y: 0,
-        z: -0.2,
+        z: 0,
         galaxySeed: 1337,
-        starCount: 40000,
-        starSize: 0.012,
+        starCount: 50000,
+        starSize: 0.015,
         radius: 3,
         branches: 5,
         spin: 2,
-        starPower: 4,
+        starPower: 4.5,
         innerColor: '#ff6600',
         outerColor: '#ffffff',
-        maxPolarAngle: 5,
         camera: {
             position: {
                 x: 0,
                 y: 2,
-                z: 0,
+                z: 0.2,
             },
             rotation: {
-                x: 0,
+                x: Math.PI / -2,
                 y: 0,
                 z: 0,
             },
         },
     };
 
+    let camTarget;
     let bufferGeometry;
     let positions = new Float32Array(params.starCount * 3);
     let colors = new Float32Array(params.starCount * 3);
@@ -154,10 +154,9 @@
     frustumCulled={false}
 >
     <OrbitControls
-        enablePan={true}
         enableRotate={false}
+        enablePan={true}
         enableDamping
-        maxPolarAngle={params.maxPolarAngle}
         minDistance={1.2}
         maxDistance={2}
         mouseButtons={{
@@ -185,8 +184,8 @@
     isBackground={true}
 />
 
-<T.Group position.y={params.x} position.x={params.y} position.z={params.z}>
-    <T.Points layers={1} frustumCulled={false}>
+<T.Group>
+    <T.Points layers={1} frustumCulled={false} position.x={0.5}>
         <T.BufferGeometry name="starBufferGeo" bind:ref={bufferGeometry} />
 
         {#await useTexture(starImage) then texture}
@@ -217,5 +216,3 @@
         <Storms />
     </T.Group>
 </T.Group>
-
-<Debug />

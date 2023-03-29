@@ -31,7 +31,7 @@
 </script>
 
 {#if cursorPos}
-    <HTML center portal={document.body}>
+    <HTML center>
         <span
             >x:{cursorPos.x.toFixed(3)}, y:{cursorPos.y.toFixed(5)}, z:0.00000</span
         >
