@@ -1,47 +1,23 @@
 <script>
     import starImage from '$lib/assets/textures/star.png';
-    import { T, useFrame, useThrelte } from '@threlte/core';
+    import { T, useThrelte } from '@threlte/core';
     import {
         OrbitControls,
         Environment,
         interactivity,
         layers,
         useTexture,
+        Text,
     } from '@threlte/extras';
     import * as THREE from 'three';
     import Segmentum from '$lib/components/Starmap/Segmentum.svelte';
 
     interactivity();
-    layers();
+    layers({ defaultLayers: 0 });
 
-    export let cursorPosition = { x: 0, y: 0 };
     const { scene } = useThrelte();
     scene.backgroundIntensity = 0.3;
 
-    let camBase = {
-        position: {
-            x: -0.3,
-            y: 2.5,
-            z: 0.2,
-        },
-        rotation: {
-            x: -1.5,
-            y: 0,
-            z: 0,
-        },
-    };
-
-    let camPos = {
-        x: camBase.position.x,
-        y: camBase.position.y,
-        z: camBase.position.z,
-    };
-
-    let camRot = {
-        x: camBase.rotation.x,
-        y: camBase.rotation.y,
-        z: camBase.rotation.z,
-    };
     const params = {
         x: 0.2,
         y: -0.2,
@@ -56,21 +32,19 @@
         innerColor: '#ff6600',
         outerColor: '#ffffff',
         maxPolarAngle: 5,
+        camera: {
+            position: {
+                x: 0,
+                y: 2,
+                z: 0,
+            },
+            rotation: {
+                x: 0,
+                y: 0,
+                z: 0,
+            },
+        },
     };
-
-    const lerpedPosition = new THREE.Vector3();
-
-    useFrame(({ camera }, delta) => {
-        const cursor = new THREE.Vector3(
-            cursorPosition.x / window.innerWidth - 0.5,
-            cursorPosition.y / window.innerHeight - 0.5
-        );
-        lerpedPosition.lerp(cursor, delta);
-        camPos.x = camBase.position.x + Math.min(lerpedPosition.x * 0.2, 2);
-        camPos.z = camBase.position.z + Math.min(lerpedPosition.y * 0.2, 2);
-        camRot.x = camBase.rotation.x + Math.min(lerpedPosition.x * 0.2, 2);
-        camRot.y = camBase.rotation.y + Math.min(lerpedPosition.y * 0.2, 2);
-    });
 
     let bufferGeometry;
     let positions = new Float32Array(params.starCount * 3);
@@ -126,23 +100,6 @@
                         : -1),
             };
 
-            /*
-            // x
-            positions[i3] =
-                (THREE.MathUtils.seededRandom(i3 * params.galaxySeed) - 0.5) *
-                10;
-            // y
-            positions[i3 + 1] =
-                (THREE.MathUtils.seededRandom((i3 + 1) * params.galaxySeed) -
-                    0.5) *
-                10;
-            // z
-            positions[i3 + 2] =
-                (THREE.MathUtils.seededRandom((i3 + 2) * params.galaxySeed) -
-                    0.5) *
-                10;
-
-             */
             // x
             positions[i3] =
                 Math.cos(branchAngle + spinAngle) * radius + spread.x;
@@ -176,21 +133,38 @@
 
 <T.PerspectiveCamera
     makeDefault
-    position={[camPos.x, camPos.y, camPos.z]}
-    rotation={[camRot.x, camRot.y, camRot.z]}
+    position={[
+        params.camera.position.x,
+        params.camera.position.y,
+        params.camera.position.z,
+    ]}
+    rotation={[
+        params.camera.rotation.x,
+        params.camera.rotation.y,
+        params.camera.rotation.z,
+    ]}
     fov={75}
     near={0.1}
     far={1000}
     layers={'all'}
     frustumCulled={false}
 >
-    <!--    <OrbitControls-->
-    <!--        enablePan={false}-->
-    <!--        enableDamping-->
-    <!--        maxPolarAngle={params.maxPolarAngle}-->
-    <!--        minDistance={2}-->
-    <!--        maxDistance={3}-->
-    <!--    />-->
+    <OrbitControls
+        enablePan={true}
+        enableDamping
+        maxPolarAngle={params.maxPolarAngle}
+        minDistance={1.2}
+        maxDistance={2}
+        mouseButtons={{
+            LEFT: THREE.MOUSE.PAN,
+            MIDDLE: THREE.MOUSE.PAN,
+            RIGHT: THREE.MOUSE.PAN,
+        }}
+        touchs={{
+            ONE: THREE.MOUSE.PAN,
+            TWO: THREE.MOUSE.PAN,
+        }}
+    />
 </T.PerspectiveCamera>
 
 <Environment
@@ -223,17 +197,12 @@
         {/await}
     </T.Points>
 
-    <T.Mesh layers={2} position.y={0} position.x={-0.5} position.z={0.5}>
+    <T.Mesh position.y={0} position.x={-0.5} position.z={0.5}>
         <T.ConeGeometry args={[0.03, 0.1, 3]} />
         <T.MeshBasicMaterial color="pink" />
     </T.Mesh>
 
-    <T.Group
-        layers={3}
-        position.x={-0.2}
-        position.y={0}
-        rotation={[-1.5, 0.0, 0.0]}
-    >
+    <T.Group position.x={-0.2} position.y={0} rotation={[-1.5, 0.0, 0.0]}>
         <Segmentum />
     </T.Group>
 </T.Group>

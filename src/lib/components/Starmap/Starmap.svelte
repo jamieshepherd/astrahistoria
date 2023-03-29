@@ -2,17 +2,13 @@
     import { Canvas } from '@threlte/core';
     import Scene from '$lib/components/Starmap/Scene.svelte';
     import PostProcessing from '$lib/components/Starmap/PostProcessing.svelte';
-
-    let cursorPosition;
 </script>
 
-<div
-    class="starmap"
-    on:mousemove={(e) => (cursorPosition = { x: e.clientX, y: e.clientY })}
->
+<div class="starmap">
     <Canvas>
-        <Scene {cursorPosition} />
-        <PostProcessing />
+        <Scene />
+
+        <!--        <PostProcessing />-->
     </Canvas>
 </div>
 
