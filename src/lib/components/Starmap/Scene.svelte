@@ -5,7 +5,6 @@
         OrbitControls,
         Environment,
         interactivity,
-        layers,
         useTexture,
         Text,
     } from '@threlte/extras';
@@ -15,7 +14,6 @@
     import Debug from '$lib/components/Starmap/Debug.svelte';
 
     interactivity();
-    layers({ defaultLayers: 0 });
 
     const { camera, scene } = useThrelte();
     scene.backgroundIntensity = 0.3;
@@ -150,7 +148,6 @@
     fov={75}
     near={0.1}
     far={1000}
-    layers={'all'}
     frustumCulled={false}
 >
     <OrbitControls
@@ -185,7 +182,7 @@
 />
 
 <T.Group>
-    <T.Points layers={1} frustumCulled={false} position.x={0.5}>
+    <T.Points frustumCulled={false} position.x={0.5}>
         <T.BufferGeometry name="starBufferGeo" bind:ref={bufferGeometry} />
 
         {#await useTexture(starImage) then texture}
