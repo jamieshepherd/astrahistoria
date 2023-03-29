@@ -4,6 +4,10 @@
     import font from '$lib/assets/fonts/MajorMonoDisplay-Regular.ttf';
     import { T } from '@threlte/core';
     import * as THREE from 'three';
+
+    const params = {
+        fontSize: 0.04,
+    };
 </script>
 
 {#await useTexture(segmentum) then texture}
@@ -24,8 +28,8 @@
         text="segmentum 
 solar"
         {font}
-        fontSize={0.05}
-        outlineBlur={0.2}
+        fontSize={params.fontSize}
+        outlineBlur={0.1}
         textAlign="center"
         position={[-0.8, 0]}
     />
@@ -33,8 +37,8 @@ solar"
         text="segmentum 
 pacifius"
         {font}
-        fontSize={0.05}
-        outlineBlur={0.2}
+        fontSize={params.fontSize}
+        outlineBlur={0.1}
         textAlign="center"
         position={[-1.48, 0.1]}
     />
@@ -42,8 +46,8 @@ pacifius"
         text="ultima 
 segmentum"
         {font}
-        fontSize={0.05}
-        outlineBlur={0.2}
+        fontSize={params.fontSize}
+        outlineBlur={0.1}
         textAlign="center"
         position={[0.4, -0.3]}
     />
@@ -51,8 +55,8 @@ segmentum"
         text="segmentum 
 tempestus"
         {font}
-        fontSize={0.05}
-        outlineBlur={0.2}
+        fontSize={params.fontSize}
+        outlineBlur={0.1}
         textAlign="center"
         position={[-0.8, -0.8]}
     />
@@ -61,8 +65,8 @@ tempestus"
         text="segmentum 
 obscurus"
         {font}
-        fontSize={0.05}
-        outlineBlur={0.2}
+        fontSize={params.fontSize}
+        outlineBlur={0.1}
         textAlign="center"
         position={[-0.9, 1]}
     />
