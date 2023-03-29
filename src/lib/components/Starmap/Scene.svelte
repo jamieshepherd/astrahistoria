@@ -11,6 +11,7 @@
     } from '@threlte/extras';
     import * as THREE from 'three';
     import Segmentum from '$lib/components/Starmap/Segmentum.svelte';
+    import Storms from '$lib/components/Storms.svelte';
 
     interactivity();
     layers({ defaultLayers: 0 });
@@ -19,11 +20,11 @@
     scene.backgroundIntensity = 0.3;
 
     const params = {
-        x: 0.2,
-        y: -0.2,
+        x: 0,
+        y: 0,
         z: -0.2,
         galaxySeed: 1337,
-        starCount: 20000,
+        starCount: 40000,
         starSize: 0.012,
         radius: 3,
         branches: 5,
@@ -116,6 +117,8 @@
             colors[i3] = mixedColor.r;
             colors[i3 + 1] = mixedColor.g;
             colors[i3 + 2] = mixedColor.b;
+
+            i += 2;
         }
     };
     createGalaxy();
@@ -183,7 +186,7 @@
 
 <T.Group position.y={params.x} position.x={params.y} position.z={params.z}>
     <T.Points layers={1} frustumCulled={false}>
-        <T.BufferGeometry bind:ref={bufferGeometry} />
+        <T.BufferGeometry name="starBufferGeo" bind:ref={bufferGeometry} />
 
         {#await useTexture(starImage) then texture}
             <T.PointsMaterial
@@ -207,5 +210,9 @@
 
     <T.Group position.x={-0.2} position.y={0} rotation={[-1.5, 0.0, 0.0]}>
         <Segmentum />
+    </T.Group>
+
+    <T.Group>
+        <Storms />
     </T.Group>
 </T.Group>

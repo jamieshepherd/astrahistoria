@@ -7,8 +7,7 @@
 <div class="starmap">
     <Canvas>
         <Scene />
-
-        <!--        <PostProcessing />-->
+        <PostProcessing />
     </Canvas>
 </div>
 
@@ -21,6 +20,7 @@
         left: 0;
         right: 0;
         bottom: 0;
+        animation: introFade 2s;
 
         &:after {
             content: '';
@@ -40,6 +40,18 @@
             right: 0;
             bottom: 0;
             pointer-events: none;
+        }
+    }
+
+    @keyframes introFade {
+        0% {
+            opacity: 0;
+            transform: scale(1.1);
+        }
+
+        100% {
+            opacity: 1;
+            transform: scale(1);
         }
     }
 </style>
