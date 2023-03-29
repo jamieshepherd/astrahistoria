@@ -151,6 +151,7 @@
 >
     <OrbitControls
         enablePan={true}
+        enableRotate={false}
         enableDamping
         maxPolarAngle={params.maxPolarAngle}
         minDistance={1.2}
@@ -188,19 +189,21 @@
             <T.PointsMaterial
                 size={params.starSize}
                 sizeAttenuation={true}
-                transparent={true}
-                alphaMap={texture}
+                map={texture}
                 depthWrite={false}
+                transparent={true}
                 blending={THREE.AdditiveBlending}
                 vertexColors={true}
             />
         {/await}
     </T.Points>
 
+    <!--
     <T.Mesh position.y={0} position.x={-0.5} position.z={0.5}>
         <T.ConeGeometry args={[0.03, 0.1, 3]} />
         <T.MeshBasicMaterial color="pink" />
     </T.Mesh>
+    -->
 
     <T.Group position.x={-0.2} position.y={0} rotation={[-1.5, 0.0, 0.0]}>
         <Segmentum />

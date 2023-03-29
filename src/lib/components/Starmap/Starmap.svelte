@@ -34,7 +34,7 @@
                 rgba(0, 0, 0, 1)
             );
             position: fixed;
-            z-index: 0;
+            z-index: 101;
             top: 0;
             left: 0;
             right: 0;

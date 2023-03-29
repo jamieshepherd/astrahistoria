@@ -21,7 +21,6 @@
 <style>
     main {
         background-color: #08090b;
-        background-image: url('$lib/assets/images/background.jpg');
         background-repeat: no-repeat;
         background-position: center -100px;
 
