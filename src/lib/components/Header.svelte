@@ -7,6 +7,7 @@
             <strong>vermillion</strong>
             &nbsp;clearance granted...
         </li>
+        <li>starmap loaded...</li>
         <li>archive loaded...</li>
         <li>
             <strong>the emperor protects. </strong>

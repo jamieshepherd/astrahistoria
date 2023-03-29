@@ -7,7 +7,10 @@
         MaskPass,
         BloomEffect,
         BlendFunction,
+        GlitchEffect,
     } from 'postprocessing';
+    import { GlitchPass } from 'three/addons/postprocessing/GlitchPass.js';
+    import { Vector2 } from 'three';
     const { scene, renderer, camera } = useThrelte();
 
     const composer = new EffectComposer(renderer, { stencilBuffer: true });
@@ -23,6 +26,15 @@
                     luminanceThreshold: 0,
                     luminanceSmoothing: 0.1,
                     mipmapBlur: true,
+                })
+            )
+        );
+        composer.addPass(
+            new EffectPass(
+                camera,
+                new GlitchEffect({
+                    duration: new Vector2(0.1, 0.1),
+                    delay: new Vector2(10, 30),
                 })
             )
         );
