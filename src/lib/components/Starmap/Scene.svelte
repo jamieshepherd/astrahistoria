@@ -1,6 +1,6 @@
 <script>
     import starImage from '$lib/assets/textures/star.png';
-    import { T, useThrelte } from '@threlte/core';
+    import { T, useFrame, useThrelte } from '@threlte/core';
     import {
         OrbitControls,
         Environment,
@@ -12,7 +12,6 @@
     import Segmentum from '$lib/components/Starmap/Segmentum.svelte';
     import Storms from '$lib/components/Starmap/Storms.svelte';
     import Debug from '$lib/components/Starmap/Debug.svelte';
-
     interactivity();
 
     const { camera, scene } = useThrelte();
@@ -210,7 +209,9 @@
         <Segmentum />
     </T.Group>
 
+    <!--    
     <T.Group rotation={[-1.5, 0.0, 0.0]}>
         <Storms />
     </T.Group>
+    -->
 </T.Group>

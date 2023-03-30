@@ -48,12 +48,15 @@
     let rotations = stormPositions.map((p) => Math.random() * 360);
     let lights = stormPositions.map((p) => p.x);
 
+    /*
     useFrame(({}, delta) => {
         rotations = rotations.map((r) =>
             Math.min(r + delta * rotationSpeed, 360)
         );
         lights = lights.map((l, i) => (Math.random() > 0.997 ? 70 : 0.1));
     });
+    
+     */
 </script>
 
 <T.AmbientLight args={[0xffffff, 2.5]} />

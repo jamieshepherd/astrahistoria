@@ -9,7 +9,7 @@
     <Canvas>
         <Scene />
         <PostProcessing />
-        <!--        <Debug />-->
+        <Debug />
     </Canvas>
 </div>
 

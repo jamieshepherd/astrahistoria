@@ -2,11 +2,21 @@
     import { Grid, HTML } from '@threlte/extras';
     import { T, useFrame, useThrelte } from '@threlte/core';
     import * as THREE from 'three';
+    import Stats from 'stats.js';
 
     let grid;
     let cursorPos;
 
     const { camera } = useThrelte();
+
+    const stats = new Stats();
+    stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
+    document.body.appendChild(stats.dom);
+
+    useFrame(() => {
+        stats.begin();
+        stats.end();
+    });
 
     const raycaster = new THREE.Raycaster();
     const pointer = new THREE.Vector2();
@@ -38,6 +48,7 @@
     </HTML>
 {/if}
 
+<!--
 <Grid
     bind:ref={grid}
     sectionColor="rgba(255,255,255,0.1)"
@@ -46,6 +57,7 @@
     gridSize={[100, 100]}
     position={[0, 0, 0]}
 />
+-->
 
 <style>
     span {
