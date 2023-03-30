@@ -7,14 +7,11 @@
     import { groupBy } from '$lib/utils/ArrayUtils.js';
 
     let currentYear = null;
-    let currentMilleniumIndex = [0];
-    let millenium = timeline[currentMilleniumIndex];
+    let currentMillenniumIndex = [0];
+    let millennium = timeline[currentMillenniumIndex];
 
-    const years = Object.keys(groupBy(millenium.events, (e) => e.year));
-
-    let sortedEvents = millenium.events.sort((a, b) =>
-        a.year.localeCompare(b.year)
-    );
+    const groupedEvents = groupBy(timeline, (e) => e.year);
+    const years = Object.keys(groupedEvents);
 
     function selectYear(year) {
         currentYear = year;
@@ -28,8 +25,9 @@
 {#if currentYear}
     {#key currentYear}
         <Events
-            millenium={millenium.millenium}
+            millennium={millennium.millennium}
             year={currentYear}
+            events={groupedEvents[currentYear]}
             {handleClickOutside}
         />
     {/key}
@@ -57,7 +55,7 @@
                 {:else}
                     <img src={point} alt="Event" />
                 {/if}
-                <span>{year}<em>.m{millenium.millenium}</em></span>
+                <span>{year}<em>.m{millennium.millennium}</em></span>
             </div>
         {/each}
     </div>

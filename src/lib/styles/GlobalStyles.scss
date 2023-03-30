@@ -58,3 +58,12 @@ a {
     background: rgba(97, 239, 255, 1);
     color: #08090b;
 }
+
+@import 'microtip/microtip';
+:root {
+    --microtip-transition-duration: 0.2s;
+    --microtip-transition-easing: ease-out;
+    --microtip-font-size: 1.2rem;
+    --microtip-font-weight: bold;
+    --microtip-text-transform: lowercase;
+}
