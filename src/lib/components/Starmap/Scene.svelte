@@ -209,9 +209,7 @@
         <Segmentum />
     </T.Group>
 
-    <!--    
     <T.Group rotation={[-1.5, 0.0, 0.0]}>
         <Storms />
     </T.Group>
-    -->
 </T.Group>
