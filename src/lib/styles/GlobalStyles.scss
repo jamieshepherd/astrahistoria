@@ -67,3 +67,7 @@ a {
     --microtip-font-weight: bold;
     --microtip-text-transform: lowercase;
 }
+[aria-label][role~="tooltip"]:not(:hover):focus::before,
+[aria-label][role~="tooltip"]:not(:hover):focus::after {
+    display: none;
+}

@@ -1,5 +1,8 @@
 {
-  "name": "Ghostmaker (Gaunt's Ghosts)",
-  "publishDate": "2020-07-01",
-  "openLibrary": "OL5843450W"
+  "title": "Ghostmaker (Gaunt's Ghosts)",
+  "author": "Dan Abnett",
+  "synopsis": "On the jungle world of Monthax, Colonel-Commissar Ibram Gaunt and his Tanith First-and-Only await the order to advance into the sweltering wilderness and drive the alien eldar from the Imperial planet.",
+  "year": "2020",
+  "openLibrary": "OL5843450W",
+  "cover": true
 }
