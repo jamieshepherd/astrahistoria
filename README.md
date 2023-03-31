@@ -53,3 +53,6 @@ Astra Historia was built pretty quickly as I wanted to learn Svelte and ThreeJS 
 - In general, though I think the galaxy looks pretty cool - I'd love to get it as close to Warhammer 40K accurate as possible. Any help in this direction would be _greatly_ appreciated!
 - Unhappy with how camera panning works. I'm using OrbitControls out of the box, but I don't really want to pan around a target, just have the camera pan on drag, and zoom on mouse scroll or pinch.
 - There's a little too much transparency on the warp storms - and stars underneath show through. Unsure how to render this better right now.
+
+## License
+Astra Historia is open-source under The MIT License (MIT).
