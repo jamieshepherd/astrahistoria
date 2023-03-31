@@ -1,3 +1,6 @@
+# Astra Historia
+A complete visualization of the Warhammer 40K history across the galaxy.
+
 ## Contribution
 Want to get involved in the Astra Historia? Great! You don't need to be a programmer or psyker to help out - here are some ways you can get started:
 ### Events
