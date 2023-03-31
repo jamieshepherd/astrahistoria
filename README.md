@@ -1,5 +1,5 @@
 # Astra Historia
-A complete visualization of the Warhammer 40K history across the galaxy.
+A complete visualization of the Warhammer 40,000 history across the galaxy.
 
 ## Contribution
 Want to get involved in the Astra Historia? Great! You don't need to be a programmer or psyker to help out - here are some ways you can get started:
@@ -53,6 +53,11 @@ Astra Historia was built pretty quickly as I wanted to learn Svelte and ThreeJS 
 - In general, though I think the galaxy looks pretty cool - I'd love to get it as close to Warhammer 40K accurate as possible. Any help in this direction would be _greatly_ appreciated!
 - Unhappy with how camera panning works. I'm using OrbitControls out of the box, but I don't really want to pan around a target, just have the camera pan on drag, and zoom on mouse scroll or pinch.
 - There's a little too much transparency on the warp storms - and stars underneath show through. Unsure how to render this better right now.
+
+## Copyright
+It's important to mention that Astra Historia is an **unofficial fan-site** for the Warhammer 40,000 universe - and all references, art, and literature related to Warhammer is © Games Workshop Limited.
+
+GW, Games Workshop, Citadel, White Dwarf, Space Marine, 40K, Warhammer, Warhammer 40,000, the ‘Aquila’ Double-headed Eagle logo, Warhammer Age of Sigmar, Battletome, Stormcast Eternals, and all associated logos, illustrations, images, names, creatures, races, vehicles, locations, weapons, characters, and the distinctive likenesses thereof, are either ® or ™, and/or © Games Workshop Limited, variably registered around the world.
 
 ## License
 Astra Historia is open-source under The MIT License (MIT).
