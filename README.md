@@ -61,3 +61,5 @@ GW, Games Workshop, Citadel, White Dwarf, Space Marine, 40K, Warhammer, Warhamme
 
 ## License
 Astra Historia is open-source under The MIT License (MIT).
+
+The MIT license distributed with this repository only applies to the source code of Astra Historia itself, and not any copyrighted Games Workshop material.
