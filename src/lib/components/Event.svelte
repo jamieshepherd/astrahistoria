@@ -40,7 +40,9 @@
             {#each event.library as book}<Book id={book} />{/each}
         </div>
     {/if}
-    {event.summary}
+    {#if event.summary}
+        {event.summary}
+    {/if}
 </div>
 
 <style lang="scss">

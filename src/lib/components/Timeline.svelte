@@ -17,7 +17,7 @@
         currentYear = year;
     }
 
-    function handleClickOutside() {
+    function handleClose() {
         selectYear(null);
     }
 </script>
@@ -28,7 +28,7 @@
             millennium={millennium.millennium}
             year={currentYear}
             events={groupedEvents[currentYear]}
-            {handleClickOutside}
+            {handleClose}
         />
     {/key}
 {/if}

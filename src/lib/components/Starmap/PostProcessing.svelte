@@ -22,7 +22,7 @@
             new EffectPass(
                 camera,
                 new BloomEffect({
-                    intensity: 1,
+                    intensity: 2,
                     luminanceThreshold: 0,
                     luminanceSmoothing: 0.1,
                     mipmapBlur: true,

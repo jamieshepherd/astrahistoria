@@ -2,7 +2,7 @@
     import { clickOutside } from '$lib/utils/clickOutside.js';
     import Event from '$lib/components/Event.svelte';
 
-    export let year, millennium, events, handleClickOutside;
+    export let year, millennium, events, handleClose;
     let eventData = [];
 
     async function getEvents() {
@@ -19,11 +19,8 @@
 </script>
 
 {#if year}
-    <div
-        class="event-year"
-        use:clickOutside
-        on:click_outside={handleClickOutside}
-    >
+    <div class="event-year" use:clickOutside>
+        <button class="close-year" on:click={handleClose}>close</button>
         <span class="title"><span class="approx" />{year}.M{millennium}</span>
         {#each eventData as event}
             <Event {event} />
@@ -44,6 +41,19 @@
             display: inline-block;
             margin-right: 3px;
         }
+    }
+    .close-year {
+        border: none;
+        outline: none;
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        right: 0;
+        background: rgb(97, 239, 255);
+        color: #333;
+        font-size: 1.2rem;
+        font-weight: 700;
+        padding: 4px 6px;
     }
     .event-year {
         font-family: 'Share Tech Mono', 'sans-serif';
