@@ -8,16 +8,12 @@
     export let selectedLocation;
 
     let globalProperties = { ...defaultProperties };
-
-    $: {
-        console.log('global props', globalProperties);
-    }
 </script>
 
 <div class="starmap">
     <Canvas>
         <Scene bind:globalProperties {selectedLocation} />
-        <PostProcessing />
+        <PostProcessing bind:globalProperties />
         <Debug bind:globalProperties />
     </Canvas>
 </div>

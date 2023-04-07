@@ -7,24 +7,24 @@
     import Storms from '$lib/components/Starmap/Storms.svelte';
     import POI from '$lib/components/Starmap/POI.svelte';
     import { createGalaxy } from '$lib/utils/GalaxyUtils.js';
+    import { beforeUpdate } from 'svelte';
 
     export let selectedLocation, galaxyParams;
 
     let bufferGeometry;
-    let positions = new Float32Array(galaxyParams.starCount * 3);
-    let colors = new Float32Array(galaxyParams.starCount * 3);
 
-    createGalaxy(positions, colors, galaxyParams);
+    beforeUpdate(() => {
+        const updated = createGalaxy(galaxyParams);
 
-    $: bufferGeometry?.setAttribute(
-        'position',
-        new THREE.BufferAttribute(positions, 3)
-    );
-
-    $: bufferGeometry?.setAttribute(
-        'color',
-        new THREE.BufferAttribute(colors, 3)
-    );
+        $: bufferGeometry?.setAttribute(
+            'position',
+            new THREE.BufferAttribute(updated.positions, 3)
+        );
+        $: bufferGeometry?.setAttribute(
+            'color',
+            new THREE.BufferAttribute(updated.colors, 3)
+        );
+    });
 </script>
 
 <T.Group>
@@ -43,13 +43,6 @@
             />
         {/await}
     </T.Points>
-
-    <!--
-  <T.Mesh position.y={0} position.x={-0.5} position.z={0.5}>
-      <T.ConeGeometry args={[0.03, 0.1, 3]} />
-      <T.MeshBasicMaterial color="pink" />
-  </T.Mesh>
-  -->
 
     <T.Group position.x={-0.2} position.y={0}>
         <Segmentum />

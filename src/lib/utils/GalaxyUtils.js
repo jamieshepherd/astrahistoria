@@ -1,6 +1,9 @@
 import * as THREE from 'three';
 
-export function createGalaxy(positions, colors, params) {
+export function createGalaxy(params) {
+    let positions = new Float32Array(params.starCount * 3);
+    let colors = new Float32Array(params.starCount * 3);
+
     const innerColor = new THREE.Color(params.innerColor);
     const outerColor = new THREE.Color(params.outerColor);
 
@@ -9,8 +12,7 @@ export function createGalaxy(positions, colors, params) {
 
         // Position
         const radius =
-            THREE.MathUtils.seededRandom(i3 * params.galaxySeed) *
-            params.radius;
+            THREE.MathUtils.seededRandom(i3 * params.seed) * params.radius;
         const spinAngle = radius * params.spin;
         const branchAngle =
             ((i % params.branches) / params.branches) * Math.PI * 2;
@@ -18,26 +20,24 @@ export function createGalaxy(positions, colors, params) {
         const spread = {
             x:
                 Math.pow(
-                    THREE.MathUtils.seededRandom(i3 * params.galaxySeed + 1),
+                    THREE.MathUtils.seededRandom(i3 * params.seed + 1),
                     params.starPower
                 ) *
-                (THREE.MathUtils.seededRandom(i3 * params.galaxySeed) < 0.5
-                    ? 1
-                    : -1),
+                (THREE.MathUtils.seededRandom(i3 * params.seed) < 0.5 ? 1 : -1),
             y:
                 Math.pow(
-                    THREE.MathUtils.seededRandom(i3 * params.galaxySeed + 2),
+                    THREE.MathUtils.seededRandom(i3 * params.seed + 2),
                     params.starPower
                 ) *
-                (THREE.MathUtils.seededRandom(i3 * params.galaxySeed * 2) < 0.5
+                (THREE.MathUtils.seededRandom(i3 * params.seed * 2) < 0.5
                     ? 1
                     : -1),
             z:
                 Math.pow(
-                    THREE.MathUtils.seededRandom(i3 * params.galaxySeed + 3),
+                    THREE.MathUtils.seededRandom(i3 * params.seed + 3),
                     params.starPower
                 ) *
-                (THREE.MathUtils.seededRandom(i3 * params.galaxySeed * 3) < 0.5
+                (THREE.MathUtils.seededRandom(i3 * params.seed * 3) < 0.5
                     ? 1
                     : -1),
         };
@@ -45,10 +45,10 @@ export function createGalaxy(positions, colors, params) {
         // x
         positions[i3] = Math.cos(branchAngle + spinAngle) * radius + spread.x;
         // y
-        positions[i3 + 1] = spread.y;
-        // z
-        positions[i3 + 2] =
+        positions[i3 + 1] =
             Math.sin(branchAngle + spinAngle) * radius + spread.z;
+        // z
+        positions[i3 + 2] = spread.z;
 
         // Color
         const mixedColor = innerColor
@@ -60,4 +60,9 @@ export function createGalaxy(positions, colors, params) {
 
         i += 2;
     }
+
+    return {
+        positions,
+        colors,
+    };
 }

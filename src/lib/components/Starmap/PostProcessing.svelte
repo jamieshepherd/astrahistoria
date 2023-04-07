@@ -11,21 +11,26 @@
     } from 'postprocessing';
     import { GlitchPass } from 'three/addons/postprocessing/GlitchPass.js';
     import { Vector2 } from 'three';
-    const { scene, renderer, camera } = useThrelte();
 
+    export let globalProperties;
+
+    const { scene, renderer, camera } = useThrelte();
     const composer = new EffectComposer(renderer, { stencilBuffer: true });
 
     const setupEffectComposer = (camera) => {
+        console.log('setup');
         composer.removeAllPasses();
         composer.addPass(new RenderPass(scene, camera));
         composer.addPass(
             new EffectPass(
                 camera,
                 new BloomEffect({
-                    intensity: 4,
-                    luminanceThreshold: 0.2,
-                    luminanceSmoothing: 0.2,
-                    mipmapBlur: true,
+                    intensity: globalProperties.bloom.intensity,
+                    luminanceThreshold:
+                        globalProperties.bloom.luminanceThreshold,
+                    luminanceSmoothing:
+                        globalProperties.bloom.luminanceSmoothing,
+                    mipmapBlur: globalProperties.bloom.mipmapBlur,
                 })
             )
         );

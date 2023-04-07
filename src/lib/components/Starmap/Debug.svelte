@@ -1,20 +1,18 @@
 <script>
     import { T, useFrame } from '@threlte/core';
     import { Pane } from 'tweakpane';
-    import Stats from 'stats.js';
+    import * as EssentialsPlugin from '@tweakpane/plugin-essentials';
 
     export let globalProperties;
 
-    const stats = new Stats();
-    stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
-    document.body.appendChild(stats.dom);
-
-    useFrame(() => {
-        stats.begin();
-        stats.end();
-    });
-
     const pane = new Pane();
+    pane.registerPlugin(EssentialsPlugin);
+
+    const fpsGraph = pane.addBlade({
+        view: 'fpsgraph',
+        label: 'fpsgraph',
+        lineCount: 2,
+    });
     const cameraFolder = pane.addFolder({
         title: 'Camera',
         expanded: true,
@@ -31,9 +29,16 @@
     );
     const galaxyFolder = pane.addFolder({
         title: 'Galaxy',
-        expanded: false,
+        expanded: true,
     });
-    galaxyFolder.addInput({ seed: globalProperties.galaxy.seed }, 'seed');
+    galaxyFolder.addInput({ seed: globalProperties.galaxy.seed }, 'seed', {
+        presetKey: 'galaxy.seed',
+    });
+    galaxyFolder.addInput(
+        { starCount: globalProperties.galaxy.starCount },
+        'starCount',
+        { presetKey: 'galaxy.starCount' }
+    );
     galaxyFolder.addInput(
         { starSize: globalProperties.galaxy.starSize },
         'starSize',
@@ -64,10 +69,40 @@
         { presetKey: 'galaxy.outerColor' }
     );
 
+    const bloomFolder = pane.addFolder({
+        title: 'Bloom',
+        expanded: false,
+    });
+    bloomFolder.addInput(
+        { intensity: globalProperties.bloom.intensity },
+        'intensity',
+        { presetKey: 'bloom.intensity' }
+    );
+    bloomFolder.addInput(
+        { luminanceThreshold: globalProperties.bloom.luminanceThreshold },
+        'luminanceThreshold',
+        { presetKey: 'bloom.luminanceThreshold' }
+    );
+    bloomFolder.addInput(
+        { luminanceSmoothing: globalProperties.bloom.luminanceSmoothing },
+        'luminanceSmoothing',
+        { presetKey: 'bloom.luminanceSmoothing' }
+    );
+    bloomFolder.addInput(
+        { mipmapBlur: globalProperties.bloom.mipmapBlur },
+        'mipmapBlur',
+        { presetKey: 'bloom.mipmapBlur' }
+    );
+
     pane.on('change', (ev) => {
         const path = ev.presetKey.split('.');
 
         globalProperties[path[0]][path[1]] = ev.value;
+    });
+
+    useFrame(() => {
+        fpsGraph.begin();
+        fpsGraph.end();
     });
 </script>
 

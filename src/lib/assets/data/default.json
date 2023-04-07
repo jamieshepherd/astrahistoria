@@ -12,16 +12,13 @@
     }
   },
   "galaxy": {
-    "x": 0,
-    "y": 0,
-    "z": 0,
     "seed": 1337,
     "starCount": 50000,
-    "starSize": 0.02,
+    "starSize": 0.03,
     "radius": 3,
     "branches": 5,
-    "spin": 2,
-    "starPower": 4.5,
+    "spin": 4,
+    "starPower": 4,
     "innerColor": "#ff6600",
     "outerColor": "#ffffff",
     "camera": {
@@ -36,5 +33,11 @@
         "z": 0
       }
     }
+  },
+  "bloom": {
+    "intensity": 4,
+    "luminanceThreshold": 0.2,
+    "luminanceSmoothing": 0.2,
+    "mipmapBlur": true
   }
 }
