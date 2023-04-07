@@ -18,7 +18,6 @@
     const composer = new EffectComposer(renderer, { stencilBuffer: true });
 
     const setupEffectComposer = (camera) => {
-        console.log('setup');
         composer.removeAllPasses();
         composer.addPass(new RenderPass(scene, camera));
         composer.addPass(

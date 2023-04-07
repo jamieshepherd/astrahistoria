@@ -18,6 +18,7 @@
     is={MapControls}
     args={[$parent, renderer.domElement]}
     screenSpacePanning={true}
+    enableRotate={false}
     mouseButtons={{
         LEFT: THREE.MOUSE.PAN,
         MIDDLE: THREE.MOUSE.PAN,
@@ -27,4 +28,6 @@
         ONE: THREE.MOUSE.PAN,
         TWO: THREE.MOUSE.PAN,
     }}
+    minDistance={1}
+    maxDistance={5}
 />
