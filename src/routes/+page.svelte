@@ -8,12 +8,18 @@
     import Computation from '$lib/components/Computation.svelte';
     import Footer from '$lib/components/Footer.svelte';
     import Starmap from '$lib/components/Starmap/Starmap.svelte';
+
+    let selectedLocation;
+
+    function handleLocationSelect(location) {
+        selectedLocation = location;
+    }
 </script>
 
 <main>
-    <Starmap />
+    <Starmap {selectedLocation} />
     <Header />
-    <Timeline />
+    <Timeline onLocationSelect={handleLocationSelect} />
     <Footer />
     <Computation />
 </main>

@@ -6,6 +6,7 @@
     import Events from '$lib/components/Events.svelte';
     import { groupBy } from '$lib/utils/ArrayUtils.js';
 
+    export let onLocationSelect;
     let currentYear = null;
     let currentMillenniumIndex = [0];
     let millennium = timeline[currentMillenniumIndex];
@@ -19,6 +20,7 @@
 
     function handleClose() {
         selectYear(null);
+        onLocationSelect(null);
     }
 </script>
 
@@ -28,7 +30,8 @@
             millennium={millennium.millennium}
             year={currentYear}
             events={groupedEvents[currentYear]}
-            {handleClose}
+            {onLocationSelect}
+            onClose={handleClose}
         />
     {/key}
 {/if}

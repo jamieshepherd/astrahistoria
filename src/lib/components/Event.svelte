@@ -3,7 +3,7 @@
     import crosshair from '$lib/assets/icons/crosshair.svg';
     import Book from '$lib/components/Book.svelte';
 
-    export let event;
+    export let event, onLocationSelect;
     let showLibrary = false;
 
     function handleToggleLibrary() {
@@ -16,8 +16,9 @@
     <div class="event-references">
         {#if event.location}
             <button
+                on:click={() => onLocationSelect(event.location)}
                 class="event-icon"
-                aria-label="Event Location"
+                aria-label="View Location"
                 data-microtip-position="right"
                 role="tooltip"><img src={crosshair} alt="target" /></button
             >
@@ -26,7 +27,7 @@
             <button
                 on:click={handleToggleLibrary}
                 class="event-icon"
-                aria-label="Event Library"
+                aria-label="View Library"
                 data-microtip-position="right"
                 role="tooltip"><img src={library} alt="library" /></button
             >
@@ -90,7 +91,8 @@
         }
     }
     .event-library {
-        border: 2px dashed rgb(97, 239, 255, 0.5);
+        background: rgba(0, 0, 0, 0.5);
+        border: 1px solid rgb(97, 239, 255, 0.5);
         box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
         margin: 10px 0 20px;
         width: 100%;

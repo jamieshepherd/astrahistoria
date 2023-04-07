@@ -28,7 +28,7 @@
     <HTML
         transform
         scale={0.1}
-        position={[-0.65, 0]}
+        position={[-0.65, -0.2]}
         pointerEvents="none"
         zIndexRange={[100, 0]}
     >

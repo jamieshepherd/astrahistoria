@@ -1,8 +1,7 @@
 <script>
     import starImage from '$lib/assets/textures/star.png';
-    import { T, useFrame, useThrelte } from '@threlte/core';
+    import { T, useThrelte } from '@threlte/core';
     import {
-        OrbitControls,
         Environment,
         interactivity,
         useTexture,
@@ -11,10 +10,14 @@
     import * as THREE from 'three';
     import Segmentum from '$lib/components/Starmap/Segmentum.svelte';
     import Storms from '$lib/components/Starmap/Storms.svelte';
-    import Debug from '$lib/components/Starmap/Debug.svelte';
+    import POI from '$lib/components/Starmap/POI.svelte';
+    import { TrackballControls } from 'three/addons/controls/TrackballControls.js';
+    import MapControls from '$lib/components/Starmap/MapControls.svelte';
     interactivity();
 
-    const { camera, scene } = useThrelte();
+    export let selectedLocation;
+
+    const { scene, camera } = useThrelte();
     scene.backgroundIntensity = 0.3;
 
     const params = {
@@ -149,7 +152,11 @@
     far={1000}
     frustumCulled={false}
 >
+    <MapControls />
+    <!--    <T is={TrackballControls} camera={camera?.current} />-->
+    <!--    
     <OrbitControls
+        bind:ref={orbitControls}
         enableRotate={false}
         enablePan={true}
         enableDamping
@@ -164,7 +171,9 @@
             ONE: THREE.MOUSE.PAN,
             TWO: THREE.MOUSE.PAN,
         }}
+        screenSpacePanning={false}
     />
+    -->
 </T.PerspectiveCamera>
 
 <!--Save some png space here since we don't see all the sides-->
@@ -211,5 +220,11 @@
 
     <T.Group rotation={[-1.5, 0.0, 0.0]}>
         <Storms />
+    </T.Group>
+
+    <T.Group rotation={[-1.5, 0.0, 0.0]} position.x={-0.9} position.z={-0.1}>
+        {#if selectedLocation}
+            <POI {selectedLocation} />
+        {/if}
     </T.Group>
 </T.Group>
