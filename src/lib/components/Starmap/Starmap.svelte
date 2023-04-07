@@ -8,6 +8,10 @@
     export let selectedLocation;
 
     let globalProperties = { ...defaultProperties };
+
+    $: {
+        console.log('global props', globalProperties);
+    }
 </script>
 
 <div class="starmap">

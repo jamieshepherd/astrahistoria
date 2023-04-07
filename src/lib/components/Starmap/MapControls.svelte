@@ -4,7 +4,7 @@
     import * as THREE from 'three';
     import { Camera } from 'three';
 
-    const { renderer } = useThrelte();
+    const { camera, renderer } = useThrelte();
 
     const parent = useParent();
     if (!($parent instanceof Camera)) {
