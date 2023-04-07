@@ -1,0 +1,40 @@
+{
+  "camera": {
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    }
+  },
+  "galaxy": {
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "seed": 1337,
+    "starCount": 50000,
+    "starSize": 0.02,
+    "radius": 3,
+    "branches": 5,
+    "spin": 2,
+    "starPower": 4.5,
+    "innerColor": "#ff6600",
+    "outerColor": "#ffffff",
+    "camera": {
+      "position": {
+        "x": 0,
+        "y": 2,
+        "z": 0.2
+      },
+      "rotation": {
+        "x": 1.57,
+        "y": 0,
+        "z": 0
+      }
+    }
+  }
+}

@@ -3,15 +3,18 @@
     import Scene from '$lib/components/Starmap/Scene.svelte';
     import PostProcessing from '$lib/components/Starmap/PostProcessing.svelte';
     import Debug from '$lib/components/Starmap/Debug.svelte';
+    import defaultProperties from '$lib/assets/data/default.json';
 
     export let selectedLocation;
+
+    let globalProperties = { ...defaultProperties };
 </script>
 
 <div class="starmap">
     <Canvas>
-        <Scene {selectedLocation} />
+        <Scene bind:globalProperties {selectedLocation} />
         <PostProcessing />
-        <Debug />
+        <Debug bind:globalProperties />
     </Canvas>
 </div>
 
