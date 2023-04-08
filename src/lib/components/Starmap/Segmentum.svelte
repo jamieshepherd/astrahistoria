@@ -12,7 +12,7 @@
 </script>
 
 {#await useTexture(segmentum) then texture}
-    <T.Mesh scale={5}>
+    <T.Mesh scale={7}>
         <T.PlaneGeometry args={[1, 1]} />
         <T.MeshBasicMaterial
             map={texture}

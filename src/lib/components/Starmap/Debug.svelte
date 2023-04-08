@@ -2,6 +2,7 @@
     import { T, useFrame } from '@threlte/core';
     import { Pane } from 'tweakpane';
     import * as EssentialsPlugin from '@tweakpane/plugin-essentials';
+    import { BlendFunction } from 'postprocessing';
 
     export let globalProperties;
 
@@ -44,7 +45,11 @@
         'starSize',
         { presetKey: 'galaxy.starSize' }
     );
-    galaxyFolder.addInput({ radius: globalProperties.galaxy.radius }, 'radius');
+    galaxyFolder.addInput(
+        { radius: globalProperties.galaxy.radius },
+        'radius',
+        { presetKey: 'galaxy.radius' }
+    );
     galaxyFolder.addInput(
         { branches: globalProperties.galaxy.branches },
         'branches',
@@ -67,6 +72,31 @@
         { outerColor: globalProperties.galaxy.outerColor },
         'outerColor',
         { presetKey: 'galaxy.outerColor' }
+    );
+
+    const stormFolder = pane.addFolder({
+        title: 'Storm',
+        expanded: false,
+    });
+    stormFolder.addInput({ scale: globalProperties.storm.scale }, 'scale', {
+        presetKey: 'storm.scale',
+        min: 0,
+        max: 5,
+    });
+    stormFolder.addInput(
+        { blending: globalProperties.storm.blending },
+        'blending',
+        { presetKey: 'storm.blending', min: 0, max: 5, step: 1 }
+    );
+    stormFolder.addInput(
+        { stormColor: globalProperties.storm.stormColor },
+        'stormColor',
+        { presetKey: 'storm.stormColor' }
+    );
+    stormFolder.addInput(
+        { lightningColor: globalProperties.storm.lightningColor },
+        'lightningColor',
+        { presetKey: 'storm.lightningColor' }
     );
 
     const bloomFolder = pane.addFolder({
@@ -92,6 +122,20 @@
         { mipmapBlur: globalProperties.bloom.mipmapBlur },
         'mipmapBlur',
         { presetKey: 'bloom.mipmapBlur' }
+    );
+
+    bloomFolder.addInput({ levels: globalProperties.bloom.levels }, 'levels', {
+        presetKey: 'bloom.levels',
+    });
+
+    bloomFolder.addInput({ radius: globalProperties.bloom.radius }, 'radius', {
+        presetKey: 'bloom.radius',
+    });
+
+    bloomFolder.addInput(
+        { blendFunction: globalProperties.bloom.blendFunction },
+        'blendFunction',
+        { presetKey: 'bloom.blendFunction', options: BlendFunction }
     );
 
     pane.on('change', (ev) => {

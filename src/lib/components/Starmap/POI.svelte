@@ -53,7 +53,7 @@
         scale={0.1}
         position={[
             locationData.location[0] / 10,
-            (locationData.location[1] + 1) / 10,
+            locationData.location[1] + 1 / 10,
             locationData.location[2] / 10,
         ]}
     >

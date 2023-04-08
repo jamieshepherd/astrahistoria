@@ -1,4 +1,5 @@
 import {
+    BlendFunction,
     BloomEffect,
     EffectPass,
     GlitchEffect,
@@ -17,6 +18,9 @@ export function setupEffectComposer(composer, scene, camera, bloomParams) {
                 luminanceThreshold: bloomParams.luminanceThreshold,
                 luminanceSmoothing: bloomParams.luminanceSmoothing,
                 mipmapBlur: bloomParams.mipmapBlur,
+                levels: bloomParams.levels,
+                radius: bloomParams.radius,
+                blendFunction: bloomParams.blendFunction,
             })
         )
     );

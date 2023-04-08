@@ -21,7 +21,7 @@
     rotation.z={globalProperties.camera.rotation.z}
     fov={75}
     near={0.1}
-    far={1000}
+    far={10}
 >
     >
     <MapControls />
@@ -62,4 +62,8 @@
     isBackground={true}
 />
 
-<Galaxy galaxyParams={globalProperties.galaxy} {selectedLocation} />
+<Galaxy
+    galaxyParams={globalProperties.galaxy}
+    stormParams={globalProperties.storm}
+    {selectedLocation}
+/>

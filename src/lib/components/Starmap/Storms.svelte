@@ -3,10 +3,12 @@
     import { HTML, useTexture } from '@threlte/extras';
     import cloud from '$lib/assets/textures/smoke.png';
     import * as THREE from 'three';
+    import { beforeUpdate } from 'svelte';
 
-    let rotationSpeed = 0.2;
-    const stormColor = new THREE.Color('#420e40');
-    const lightningColor = new THREE.Color('#552653');
+    export let stormParams;
+    let rotationSpeed = 0.1;
+    let stormColor = new THREE.Color(stormParams.stormColor);
+    let lightningColor = new THREE.Color(stormParams.lightningColor);
     const stormPositions = [
         { x: -0.3, y: 0.8 },
         { x: -0.5, y: 0.9 },
@@ -62,12 +64,21 @@
             }
         });
     });
+
+    beforeUpdate(() => {
+        stormColor = new THREE.Color(stormParams.stormColor);
+        lightningColor = new THREE.Color(stormParams.lightningColor);
+    });
 </script>
 
 <T.AmbientLight args={[0xffffff, 2.5]} />
 {#await useTexture(cloud) then texture}
     {#each stormPositions as storm, i}
-        <T.Mesh position={[storm.x, storm.y, 0]} rotation.z={rotations[i]}>
+        <T.Mesh
+            position={[storm.x, storm.y, 0]}
+            rotation.z={rotations[i]}
+            scale={stormParams.scale}
+        >
             <T.PlaneBufferGeometry name="stormBufferGeo" args={[0.5, 0.5]} />
             <T.MeshLambertMaterial
                 color={lights[i] === 0
@@ -80,7 +91,7 @@
                 map={texture}
                 transparent={true}
                 depthWrite={false}
-                blending={THREE.AdditiveBlending}
+                blending={stormParams.blending}
             />
             <!--            
             <T.PointLight

@@ -9,7 +9,7 @@
     import { createGalaxy } from '$lib/utils/GalaxyUtils.js';
     import { beforeUpdate } from 'svelte';
 
-    export let selectedLocation, galaxyParams;
+    export let selectedLocation, galaxyParams, stormParams;
 
     let bufferGeometry;
 
@@ -49,10 +49,10 @@
     </T.Group>
 
     <T.Group>
-        <Storms />
+        <Storms {stormParams} />
     </T.Group>
 
-    <T.Group rotation={[-1.5, 0.0, 0.0]} position.x={-0.9} position.z={-0.1}>
+    <T.Group position.x={-0.9} position.z={-0.1}>
         {#if selectedLocation}
             <POI {selectedLocation} />
         {/if}
