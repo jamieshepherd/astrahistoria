@@ -15,10 +15,10 @@
   "galaxy": {
     "seed": 1337,
     "starCount": 40000,
-    "starSize": 0.04,
+    "starSize": 0.05,
     "radius": 4,
     "branches": 5,
-    "spin": 3,
+    "spin": 4,
     "starPower": 4,
     "innerColor": "#e28c93",
     "outerColor": "#8ebff7",
