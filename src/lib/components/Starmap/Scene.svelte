@@ -54,10 +54,10 @@
     files={[
         'skybox_right1.jpg',
         'skybox_left2.jpg',
-        'skybox_left2.jpg',
+        'skybox_top3.jpg',
         'skybox_bottom4.jpg',
-        'skybox_bottom4.jpg',
-        'skybox_bottom4.jpg',
+        'skybox_front5.jpg',
+        'skybox_back6.jpg',
     ]}
     isBackground={true}
 />

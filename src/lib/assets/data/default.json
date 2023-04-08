@@ -13,8 +13,8 @@
   },
   "galaxy": {
     "seed": 1337,
-    "starCount": 50000,
-    "starSize": 0.03,
+    "starCount": 40000,
+    "starSize": 0.02,
     "radius": 3,
     "branches": 5,
     "spin": 4,
