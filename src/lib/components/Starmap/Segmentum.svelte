@@ -90,7 +90,7 @@
     .segmentum-label {
         color: #333333;
         font-weight: 600;
-        font-size: 1.4rem;
+        font-size: 2rem;
         text-align: center;
         line-height: 1rem;
         pointer-events: none;
@@ -99,7 +99,7 @@
 
         span {
             background: rgba(0, 246, 255, 1);
-            padding: 6px 8px;
+            padding: 14px 8px;
             display: block;
             width: fit-content;
             margin: 0 auto;

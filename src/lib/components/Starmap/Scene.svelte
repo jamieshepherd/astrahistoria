@@ -18,8 +18,7 @@
     }
 
     function dragEnd() {
-        globalProperties.camera.position.x = camera.current?.position.x;
-        globalProperties.camera.position.y = camera.current?.position.y;
+        globalProperties.camera.position = camera.current?.position;
     }
 
     dragControls(renderer.domElement, dragAction, dragEnd);
@@ -38,33 +37,7 @@
     fov={50}
     near={0.1}
     far={10}
->
-    >
-    <!--    
-    <MapControls />
-    -->
-    <!--    <T is={TrackballControls} camera={camera?.current} />-->
-    <!--    
-    <OrbitControls
-        bind:ref={orbitControls}
-        enableRotate={false}
-        enablePan={true}
-        enableDamping
-        minDistance={1.2}
-        maxDistance={2}
-        mouseButtons={{
-            LEFT: THREE.MOUSE.PAN,
-            MIDDLE: THREE.MOUSE.PAN,
-            RIGHT: THREE.MOUSE.PAN,
-        }}
-        touchs={{
-            ONE: THREE.MOUSE.PAN,
-            TWO: THREE.MOUSE.PAN,
-        }}
-        screenSpacePanning={false}
-    />
-    -->
-</T.PerspectiveCamera>
+/>
 
 <!--Save some png space here since we don't see all the sides-->
 <Environment

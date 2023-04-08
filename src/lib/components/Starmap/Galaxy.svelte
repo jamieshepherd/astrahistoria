@@ -49,9 +49,7 @@
     </T.Group>
 
     <T.Group>
-        <!--        
         <Storms {stormParams} />
-        -->
     </T.Group>
 
     <T.Group position.x={-0.9} position.z={-0.1}>
