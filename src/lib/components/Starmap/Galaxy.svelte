@@ -44,12 +44,14 @@
         {/await}
     </T.Points>
 
-    <T.Group position.x={-0.2} position.y={0}>
+    <T.Group position.x={-0.8} position.y={-0.2}>
         <Segmentum />
     </T.Group>
 
     <T.Group>
+        <!--        
         <Storms {stormParams} />
+        -->
     </T.Group>
 
     <T.Group position.x={-0.9} position.z={-0.1}>

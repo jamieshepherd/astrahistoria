@@ -28,7 +28,7 @@
     <HTML
         transform
         scale={0.1}
-        position={[-0.65, -0.2]}
+        position={[-1.5, 0]}
         pointerEvents="none"
         zIndexRange={[100, 0]}
     >
@@ -40,7 +40,7 @@
     <HTML
         transform
         scale={0.1}
-        position={[-1.34, 0.1]}
+        position={[-2.6, 0.1]}
         pointerEvents="none"
         zIndexRange={[100, 0]}
     >
@@ -52,7 +52,7 @@
     <HTML
         transform
         scale={0.1}
-        position={[0.4, -0.3]}
+        position={[1, -1]}
         pointerEvents="none"
         zIndexRange={[100, 0]}
     >
@@ -64,7 +64,7 @@
     <HTML
         transform
         scale={0.1}
-        position={[-0.8, -0.8]}
+        position={[-1.6, -1.7]}
         pointerEvents="none"
         zIndexRange={[100, 0]}
     >
@@ -76,7 +76,7 @@
     <HTML
         transform
         scale={0.1}
-        position={[-0.9, 1]}
+        position={[-1.6, 1.6]}
         pointerEvents="none"
         zIndexRange={[100, 0]}
     >

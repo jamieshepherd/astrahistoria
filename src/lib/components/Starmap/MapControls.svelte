@@ -29,5 +29,6 @@
         TWO: THREE.MOUSE.PAN,
     }}
     minDistance={1}
-    maxDistance={5}
+    maxDistance={4}
+    zoomSpeed={0.4}
 />

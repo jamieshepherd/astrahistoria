@@ -1,20 +1,21 @@
 {
   "camera": {
     "position": {
-      "x": 0,
-      "y": 0,
-      "z": 2
+      "x": -0.8,
+      "y": -0.4,
+      "z": 4
     },
     "rotation": {
       "x": 0,
       "y": 0,
       "z": 0
-    }
+    },
+    "panSpeed": 0.005
   },
   "galaxy": {
     "seed": 1337,
     "starCount": 40000,
-    "starSize": 0.02,
+    "starSize": 0.04,
     "radius": 4,
     "branches": 5,
     "spin": 3,

@@ -3,11 +3,27 @@
     import { Environment, interactivity } from '@threlte/extras';
     import MapControls from '$lib/components/Starmap/MapControls.svelte';
     import Galaxy from '$lib/components/Starmap/Galaxy.svelte';
+    import { dragControls } from '$lib/utils/DragUtils.js';
     interactivity();
 
     export let selectedLocation, globalProperties;
 
-    const { scene } = useThrelte();
+    const { scene, camera, renderer } = useThrelte();
+
+    function dragAction(deltaX, deltaY) {
+        camera.current?.translateX(
+            deltaX * -1 * globalProperties.camera.panSpeed
+        );
+        camera.current?.translateY(deltaY * globalProperties.camera.panSpeed);
+    }
+
+    function dragEnd() {
+        globalProperties.camera.position.x = camera.current?.position.x;
+        globalProperties.camera.position.y = camera.current?.position.y;
+    }
+
+    dragControls(renderer.domElement, dragAction, dragEnd);
+
     scene.backgroundIntensity = 0.3;
 </script>
 
@@ -19,12 +35,14 @@
     rotation.x={globalProperties.camera.rotation.x}
     rotation.y={globalProperties.camera.rotation.y}
     rotation.z={globalProperties.camera.rotation.z}
-    fov={75}
+    fov={50}
     near={0.1}
     far={10}
 >
     >
+    <!--    
     <MapControls />
+    -->
     <!--    <T is={TrackballControls} camera={camera?.current} />-->
     <!--    
     <OrbitControls
