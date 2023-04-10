@@ -28,16 +28,14 @@
 </script>
 
 <T.Group>
-    <T.Points frustumCulled={false} position.x={0.5}>
+    <T.Points position.x={0.5}>
         <T.BufferGeometry name="starBufferGeo" bind:ref={bufferGeometry} />
 
         {#await useTexture(starImage) then texture}
             <T.PointsMaterial
                 size={galaxyParams.starSize}
-                sizeAttenuation={true}
                 map={texture}
                 depthWrite={false}
-                transparent={true}
                 blending={THREE.AdditiveBlending}
                 vertexColors={true}
             />

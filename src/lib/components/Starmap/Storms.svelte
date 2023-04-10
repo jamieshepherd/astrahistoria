@@ -79,7 +79,7 @@
             rotation.z={rotations[i]}
             scale={stormParams.scale}
         >
-            <T.PlaneBufferGeometry name="stormBufferGeo" args={[0.5, 0.5]} />
+            <T.PlaneGeometry name="stormBufferGeo" args={[0.5, 0.5]} />
             <T.MeshLambertMaterial
                 color={lights[i] === 0
                     ? stormColor

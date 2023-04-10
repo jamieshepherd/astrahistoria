@@ -10,7 +10,10 @@
       "y": 0,
       "z": 0
     },
-    "panSpeed": 0.005
+    "panSpeed": 0.005,
+    "zoomAmount": 0.01,
+    "minZoom": 2,
+    "maxZoom": 7
   },
   "galaxy": {
     "seed": 1337,

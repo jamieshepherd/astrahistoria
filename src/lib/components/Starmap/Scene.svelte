@@ -1,7 +1,6 @@
 <script>
     import { T, useThrelte } from '@threlte/core';
     import { Environment, interactivity } from '@threlte/extras';
-    import MapControls from '$lib/components/Starmap/MapControls.svelte';
     import Galaxy from '$lib/components/Starmap/Galaxy.svelte';
     import { dragControls } from '$lib/utils/DragUtils.js';
     interactivity();
@@ -11,19 +10,35 @@
     const { scene, camera, renderer } = useThrelte();
 
     function dragAction(deltaX, deltaY) {
-        camera.current?.translateX(
+        if (!camera.current) return;
+
+        camera.current.translateX(
             deltaX * -1 * globalProperties.camera.panSpeed
         );
-        camera.current?.translateY(deltaY * globalProperties.camera.panSpeed);
+        camera.current.translateY(deltaY * globalProperties.camera.panSpeed);
+    }
+
+    function zoomAction(delta) {
+        if (!camera.current) return;
+
+        camera.current.translateZ(delta * globalProperties.camera.zoomAmount);
+        if (camera.current.position.z > globalProperties.camera.maxZoom) {
+            camera.current.position.z = globalProperties.camera.maxZoom;
+        }
+
+        if (camera.current.position.z < globalProperties.camera.minZoom) {
+            camera.current.position.z = globalProperties.camera.minZoom;
+        }
     }
 
     function dragEnd() {
         globalProperties.camera.position = camera.current?.position;
     }
 
-    dragControls(renderer.domElement, dragAction, dragEnd);
+    dragControls(renderer.domElement, dragAction, zoomAction, dragEnd);
 
     scene.backgroundIntensity = 0.3;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 </script>
 
 <T.PerspectiveCamera
@@ -42,14 +57,7 @@
 <!--Save some png space here since we don't see all the sides-->
 <Environment
     path="/env/"
-    files={[
-        'skybox_right1.jpg',
-        'skybox_left2.jpg',
-        'skybox_top3.jpg',
-        'skybox_bottom4.jpg',
-        'skybox_front5.jpg',
-        'skybox_back6.jpg',
-    ]}
+    files={['4.jpg', '5.jpg', '6.jpg', '1.jpg', '2.jpg', '3.jpg']}
     isBackground={true}
 />
 
