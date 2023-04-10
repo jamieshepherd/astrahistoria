@@ -20,7 +20,7 @@
 
 <style lang="scss">
     .starmap {
-        background: transparent;
+        background: url('$lib/assets/images/bg.jpg');
         position: fixed;
         z-index: 0;
         top: 0;

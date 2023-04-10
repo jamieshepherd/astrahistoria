@@ -1,13 +1,15 @@
 import {
     BlendFunction,
     BloomEffect,
+    EffectComposer,
     EffectPass,
     GlitchEffect,
     RenderPass,
 } from 'postprocessing';
 import { Vector2 } from 'three';
 
-export function setupEffectComposer(composer, scene, camera, bloomParams) {
+export function setupEffectComposer(renderer, scene, camera, bloomParams) {
+    const composer = new EffectComposer(renderer, { stencilBuffer: true });
     composer.removeAllPasses();
     composer.addPass(new RenderPass(scene, camera));
     composer.addPass(
@@ -33,4 +35,6 @@ export function setupEffectComposer(composer, scene, camera, bloomParams) {
             })
         )
     );
+
+    return composer;
 }

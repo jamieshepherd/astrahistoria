@@ -16,11 +16,29 @@
     export let globalProperties;
 
     const { scene, renderer, camera } = useThrelte();
-    const composer = new EffectComposer(renderer, { stencilBuffer: true });
+    let composer;
+
+    window.addEventListener(
+        'resize',
+        () => {
+            composer = setupEffectComposer(
+                renderer,
+                scene,
+                $camera,
+                globalProperties.bloom
+            );
+        },
+        false
+    );
 
     // We need to set up the passes according to the camera in use
-    $: setupEffectComposer(composer, scene, $camera, globalProperties.bloom);
+    $: composer = setupEffectComposer(
+        renderer,
+        scene,
+        $camera,
+        globalProperties.bloom
+    );
     useRender((_, delta) => {
-        composer.render(delta);
+        composer?.render(delta);
     });
 </script>

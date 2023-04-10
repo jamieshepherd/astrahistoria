@@ -17,12 +17,17 @@
         pane = new Pane();
         pane.registerPlugin(EssentialsPlugin);
 
-        fpsGraph = pane.addBlade({
+        const debugFolder = pane.addFolder({
+            title: 'Debug',
+            expanded: false,
+        });
+
+        fpsGraph = debugFolder.addBlade({
             view: 'fpsgraph',
             label: 'fpsgraph',
             lineCount: 2,
         });
-        const cameraFolder = pane.addFolder({
+        const cameraFolder = debugFolder.addFolder({
             title: 'Camera',
             expanded: true,
         });
@@ -36,7 +41,7 @@
             'rotation',
             { presetKey: 'camera.rotation', min: 0, max: 3.14, step: 0.01 }
         );
-        const galaxyFolder = pane.addFolder({
+        const galaxyFolder = debugFolder.addFolder({
             title: 'Galaxy',
             expanded: true,
         });
@@ -82,7 +87,7 @@
             { presetKey: 'galaxy.outerColor' }
         );
 
-        const stormFolder = pane.addFolder({
+        const stormFolder = debugFolder.addFolder({
             title: 'Storm',
             expanded: false,
         });
@@ -107,7 +112,7 @@
             { presetKey: 'storm.lightningColor' }
         );
 
-        const bloomFolder = pane.addFolder({
+        const bloomFolder = debugFolder.addFolder({
             title: 'Bloom',
             expanded: false,
         });

@@ -39,7 +39,7 @@
     }
   },
   "bloom": {
-    "intensity": 3,
+    "intensity": 2,
     "luminanceThreshold": 0.1,
     "luminanceSmoothing": 0.2,
     "mipmapBlur": true,

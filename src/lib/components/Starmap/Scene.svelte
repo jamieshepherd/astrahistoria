@@ -54,13 +54,6 @@
     far={10}
 />
 
-<!--Save some png space here since we don't see all the sides-->
-<Environment
-    path="/env/"
-    files={['4.jpg', '5.jpg', '6.jpg', '1.jpg', '2.jpg', '3.jpg']}
-    isBackground={true}
-/>
-
 <Galaxy
     galaxyParams={globalProperties.galaxy}
     stormParams={globalProperties.storm}
