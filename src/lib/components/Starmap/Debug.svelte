@@ -1,169 +1,60 @@
 <script>
     import { T, useFrame } from '@threlte/core';
-    import { Pane } from 'tweakpane';
-    import * as EssentialsPlugin from '@tweakpane/plugin-essentials';
-    import { BlendFunction } from 'postprocessing';
-    import { afterUpdate, beforeUpdate } from 'svelte';
+    import * as UIL from 'uil';
 
     export let globalProperties;
 
-    let pane;
+    let ui;
     let fpsGraph;
 
+    function uiChange(v, id) {
+        console.log(v, id);
+    }
+
     function createPane() {
-        if (pane) {
-            pane.dispose();
-        }
-        pane = new Pane();
-        pane.registerPlugin(EssentialsPlugin);
+        if (ui) return;
+        ui = new UIL.Gui({ w: 300 }).onChange(uiChange);
 
-        const debugFolder = pane.addFolder({
-            title: 'Debug',
-            expanded: false,
-        });
+        ui.add('fps', { res: 70 }).open();
 
-        fpsGraph = debugFolder.addBlade({
-            view: 'fpsgraph',
-            label: 'fpsgraph',
-            lineCount: 2,
+        const cameraGroup = ui.add('group', {
+            name: 'Camera',
         });
-        const cameraFolder = debugFolder.addFolder({
-            title: 'Camera',
-            expanded: true,
-        });
-        cameraFolder.addInput(
-            { position: globalProperties.camera.position },
-            'position',
-            { presetKey: 'camera.position' }
-        );
-        cameraFolder.addInput(
-            { rotation: globalProperties.camera.rotation },
-            'rotation',
-            { presetKey: 'camera.rotation', min: 0, max: 3.14, step: 0.01 }
-        );
-        const galaxyFolder = debugFolder.addFolder({
-            title: 'Galaxy',
-            expanded: true,
-        });
-        galaxyFolder.addInput({ seed: globalProperties.galaxy.seed }, 'seed', {
-            presetKey: 'galaxy.seed',
-        });
-        galaxyFolder.addInput(
-            { starCount: globalProperties.galaxy.starCount },
-            'starCount',
-            { presetKey: 'galaxy.starCount' }
-        );
-        galaxyFolder.addInput(
-            { starSize: globalProperties.galaxy.starSize },
-            'starSize',
-            { presetKey: 'galaxy.starSize' }
-        );
-        galaxyFolder.addInput(
-            { radius: globalProperties.galaxy.radius },
-            'radius',
-            { presetKey: 'galaxy.radius' }
-        );
-        galaxyFolder.addInput(
-            { branches: globalProperties.galaxy.branches },
-            'branches',
-            { presetKey: 'galaxy.branches' }
-        );
-        galaxyFolder.addInput({ spin: globalProperties.galaxy.spin }, 'spin', {
-            presetKey: 'galaxy.spin',
-        });
-        galaxyFolder.addInput(
-            { starPower: globalProperties.galaxy.starPower },
-            'starPower',
-            { presetKey: 'galaxy.starPower' }
-        );
-        galaxyFolder.addInput(
-            { innerColor: globalProperties.galaxy.innerColor },
-            'innerColor',
-            { presetKey: 'galaxy.innerColor' }
-        );
-        galaxyFolder.addInput(
-            { outerColor: globalProperties.galaxy.outerColor },
-            'outerColor',
-            { presetKey: 'galaxy.outerColor' }
-        );
+        cameraGroup.add(globalProperties.camera, 'position').listen();
+        cameraGroup.add(globalProperties.camera, 'rotation').listen();
+        cameraGroup.open();
 
-        const stormFolder = debugFolder.addFolder({
-            title: 'Storm',
-            expanded: false,
+        const galaxyGroup = ui.add('group', {
+            name: 'Galaxy',
         });
-        stormFolder.addInput({ scale: globalProperties.storm.scale }, 'scale', {
-            presetKey: 'storm.scale',
-            min: 0,
-            max: 5,
+        galaxyGroup.add(globalProperties.galaxy, 'seed').listen();
+        galaxyGroup.add(globalProperties.galaxy, 'starCount').listen();
+        galaxyGroup.add(globalProperties.galaxy, 'starSize').listen();
+        galaxyGroup.add(globalProperties.galaxy, 'radius').listen();
+        galaxyGroup.add(globalProperties.galaxy, 'branches').listen();
+        galaxyGroup.add(globalProperties.galaxy, 'spin').listen();
+        galaxyGroup.add(globalProperties.galaxy, 'starPower').listen();
+        galaxyGroup.add(globalProperties.galaxy, 'innerColor').listen();
+        galaxyGroup.add(globalProperties.galaxy, 'outerColor').listen();
+
+        const stormGroup = ui.add('group', {
+            name: 'Storm',
         });
-        stormFolder.addInput(
-            { blending: globalProperties.storm.blending },
-            'blending',
-            { presetKey: 'storm.blending', min: 0, max: 5, step: 1 }
-        );
-        stormFolder.addInput(
-            { stormColor: globalProperties.storm.stormColor },
-            'stormColor',
-            { presetKey: 'storm.stormColor' }
-        );
-        stormFolder.addInput(
-            { lightningColor: globalProperties.storm.lightningColor },
-            'lightningColor',
-            { presetKey: 'storm.lightningColor' }
-        );
+        stormGroup.add(globalProperties.storm, 'scale').listen();
+        stormGroup.add(globalProperties.storm, 'blending').listen();
+        stormGroup.add(globalProperties.storm, 'stormColor').listen();
+        stormGroup.add(globalProperties.storm, 'lightningColor').listen();
 
-        const bloomFolder = debugFolder.addFolder({
-            title: 'Bloom',
-            expanded: false,
+        const bloomGroup = ui.add('group', {
+            name: 'Bloom',
         });
-        bloomFolder.addInput(
-            { intensity: globalProperties.bloom.intensity },
-            'intensity',
-            { presetKey: 'bloom.intensity' }
-        );
-        bloomFolder.addInput(
-            { luminanceThreshold: globalProperties.bloom.luminanceThreshold },
-            'luminanceThreshold',
-            { presetKey: 'bloom.luminanceThreshold' }
-        );
-        bloomFolder.addInput(
-            { luminanceSmoothing: globalProperties.bloom.luminanceSmoothing },
-            'luminanceSmoothing',
-            { presetKey: 'bloom.luminanceSmoothing' }
-        );
-        bloomFolder.addInput(
-            { mipmapBlur: globalProperties.bloom.mipmapBlur },
-            'mipmapBlur',
-            { presetKey: 'bloom.mipmapBlur' }
-        );
-
-        bloomFolder.addInput(
-            { levels: globalProperties.bloom.levels },
-            'levels',
-            {
-                presetKey: 'bloom.levels',
-            }
-        );
-
-        bloomFolder.addInput(
-            { radius: globalProperties.bloom.radius },
-            'radius',
-            {
-                presetKey: 'bloom.radius',
-            }
-        );
-
-        bloomFolder.addInput(
-            { blendFunction: globalProperties.bloom.blendFunction },
-            'blendFunction',
-            { presetKey: 'bloom.blendFunction', options: BlendFunction }
-        );
-
-        pane.on('change', (ev) => {
-            const path = ev.presetKey.split('.');
-
-            globalProperties[path[0]][path[1]] = ev.value;
-        });
+        bloomGroup.add(globalProperties.bloom, 'intensity').listen();
+        bloomGroup.add(globalProperties.bloom, 'luminanceThreshold').listen();
+        bloomGroup.add(globalProperties.bloom, 'luminanceSmoothing').listen();
+        bloomGroup.add(globalProperties.bloom, 'mipmapBlur').listen();
+        bloomGroup.add(globalProperties.bloom, 'levels').listen();
+        bloomGroup.add(globalProperties.bloom, 'radius').listen();
+        bloomGroup.add(globalProperties.bloom, 'blendFunction').listen();
     }
 
     useFrame(() => {
@@ -171,9 +62,7 @@
         fpsGraph?.end();
     });
 
-    beforeUpdate(() => {
-        createPane();
-    });
+    createPane();
 </script>
 
 <!--
