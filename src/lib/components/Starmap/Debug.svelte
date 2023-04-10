@@ -11,6 +11,9 @@
     let fpsGraph;
 
     function createPane() {
+        if (pane) {
+            pane.dispose();
+        }
         pane = new Pane();
         pane.registerPlugin(EssentialsPlugin);
 
