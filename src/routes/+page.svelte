@@ -19,11 +19,11 @@
 
 <main>
     <Starmap {selectedLocation} {debugOpen} />
+    <Audio />
     <Header />
     <Timeline onLocationSelect={handleLocationSelect} />
     <Footer />
     <Computation bind:debugOpen />
-    <Audio />
 </main>
 
 <style>

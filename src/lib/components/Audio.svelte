@@ -61,6 +61,7 @@
         opacity: 0.7;
         padding: 10px;
         transition: all 0.2s;
+        z-index: 0;
 
         &:hover {
             opacity: 1;

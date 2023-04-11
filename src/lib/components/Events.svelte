@@ -60,8 +60,8 @@
         font-size: 1.8rem;
         cursor: initial;
         margin-left: auto;
-        margin-right: 50px;
-        margin-top: 50px;
+        margin-right: 30px;
+        margin-top: 30px;
         max-height: 100%;
         overflow-y: auto;
 
