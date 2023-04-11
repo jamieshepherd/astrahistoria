@@ -18,7 +18,7 @@
             <button
                 on:click={() => onLocationSelect(event.location)}
                 class="event-icon"
-                aria-label="View Location"
+                aria-label="Show Location"
                 data-microtip-position="right"
                 role="tooltip"><img src={crosshair} alt="target" /></button
             >

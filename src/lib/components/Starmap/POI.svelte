@@ -10,7 +10,6 @@
     let lineGeometry;
     const { camera } = useThrelte();
 
-    console.log('theres a selected location! ', selectedLocation);
     async function getData() {
         const response = await fetch(
             `/data/locations/${selectedLocation}.json`
@@ -22,28 +21,22 @@
     getData();
 
     $: if (lineGeometry && locationData) {
-        console.log(locationData);
         lineGeometry.setPositions([
             locationData.location[0] / 10,
             locationData.location[1] / 10,
-            locationData.location[1] / 10,
+            0,
             locationData.location[0] / 10,
-            locationData.location[1] + 1 / 10,
-            locationData.location[2] / 10,
+            (locationData.location[1] + 1) / 10,
+            0,
         ]);
     }
 
     $: if (locationData) {
         camera.current?.position.set(
-            locationData.location[0],
-            locationData.location[1],
-            1
+            locationData.location[0] / 10,
+            locationData.location[1] / 10,
+            camera.current?.position.z
         );
-
-        // then tell the controls to update
-        // controls.update();
-    } else {
-        camera.current?.position.set(0, 0, 0);
     }
 </script>
 
@@ -53,8 +46,8 @@
         scale={0.1}
         position={[
             locationData.location[0] / 10,
-            locationData.location[1] + 1 / 10,
-            locationData.location[2] / 10,
+            (locationData.location[1] + 1) / 10,
+            0,
         ]}
     >
         <div class="point-of-interest">

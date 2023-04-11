@@ -1,6 +1,6 @@
 <script>
     import { T } from '@threlte/core';
-    import { useTexture } from '@threlte/extras';
+    import { interactivity, useTexture } from '@threlte/extras';
     import starImage from '$lib/assets/textures/star.png';
     import * as THREE from 'three';
     import Segmentum from '$lib/components/Starmap/Segmentum.svelte';
@@ -12,6 +12,7 @@
     export let selectedLocation, galaxyParams, stormParams;
 
     let bufferGeometry;
+    interactivity();
 
     beforeUpdate(() => {
         const updated = createGalaxy(galaxyParams);
@@ -50,7 +51,7 @@
         <Storms {stormParams} />
     </T.Group>
 
-    <T.Group position.x={-0.9} position.z={-0.1}>
+    <T.Group position.x={-2} position.y={-0.3}>
         {#if selectedLocation}
             <POI {selectedLocation} />
         {/if}

@@ -44,7 +44,15 @@ There are a few non-obious call-outs here. Firstly, the _openLibrary_ field here
 Secondly, the _cover_ field refers to whether or not you have provided a cover image for the entry. To do that, you'll need to also drop in a jpg image file alongside the JSON file - with the same ISBN-13 code as the filename. For example `9780671784102.jpg` would be in the directory with `9780671784102.json`. These files can only be jpg files, and should be as small as possible to preserve bandwidth. You can usually find a good cover image on OpenLibrary.org.
 
 ### Locations
-Coming soon.
+Example location:
+
+```json
+{
+  "name": "Tanith",
+  "sector": "Sabbat Worlds",
+  "location": [-12.8,-8.5]
+}
+```
 
 ### Coders
 Astra Historia was built pretty quickly as I wanted to learn Svelte and ThreeJS over a weekend. As a result - there's probably going to be a bunch of bugs, performance issues, and more. Please open PRs liberally, every little helps.

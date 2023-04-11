@@ -1,21 +1,24 @@
 <script>
-    import { T, useFrame } from '@threlte/core';
+    import { T, useThrelte } from '@threlte/core';
     import * as UIL from 'uil';
+    import { HTML, interactivity, useInteractivity } from '@threlte/extras';
+    interactivity();
 
     export let globalProperties;
 
     let ui;
+    let mpos = { x: 0, y: 0, z: 0 };
 
     function createPane() {
         if (ui) return;
         ui = new UIL.Gui({ w: 300 });
 
-        const fpsGroup = ui.add('group', {
+        const statsGroup = ui.add('group', {
             name: 'Stats',
             bg: '#333',
             open: true,
         });
-        fpsGroup.add('fps', { res: 70 }).open();
+        statsGroup.add('fps', { res: 70 });
 
         const cameraGroup = ui.add('group', {
             name: 'Camera',
@@ -173,6 +176,31 @@
     $: createPane();
 </script>
 
+<T.Group>
+    <T.Mesh
+        on:pointermove={(e) =>
+            (mpos = { x: (e.point.x + 2) * 10, y: (e.point.y + 0.3) * 10 })}
+    >
+        <T.PlaneGeometry args={[10, 10]} />
+        <T.MeshBasicMaterial
+            transparent={true}
+            opacity={1}
+            depthWrite={false}
+            color="#00f6ff"
+            visible={false}
+        />
+    </T.Mesh>
+</T.Group>
+
+<HTML
+    as="aside"
+    portal={document.body}
+    pointerEvents="none"
+    calculatePosition={() => [0, 0]}
+>
+    <span>({mpos.x.toFixed(3)},{mpos.y.toFixed(3)})</span>
+</HTML>
+
 <!--
 <Grid
     bind:ref={grid}
@@ -187,9 +215,6 @@
 <style>
     span {
         display: block;
-        position: absolute;
-        top: 50px;
-        right: 50px;
-        width: 100%;
+        position: fixed;
     }
 </style>
