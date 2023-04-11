@@ -8,6 +8,7 @@
     import Computation from '$lib/components/Computation.svelte';
     import Footer from '$lib/components/Footer.svelte';
     import Starmap from '$lib/components/Starmap/Starmap.svelte';
+    import Audio from '$lib/components/Audio.svelte';
 
     let selectedLocation, debugOpen;
 
@@ -22,6 +23,7 @@
     <Timeline onLocationSelect={handleLocationSelect} />
     <Footer />
     <Computation bind:debugOpen />
+    <Audio />
 </main>
 
 <style>

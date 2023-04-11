@@ -22,6 +22,11 @@
         top: 30px;
         left: 30px;
         user-select: none;
+
+        animation: delayDelete 0.2s;
+        animation-fill-mode: forwards;
+        animation-delay: 8s;
+        pointer-events: none;
     }
     h1 {
         background: rgba(0, 0, 0, 0.5);
@@ -38,9 +43,28 @@
         background: rgba(0, 0, 0, 0.5);
         font-size: 1.2rem;
         display: flex;
-        padding: 2px 5px;
+        padding: 0 5px;
         align-items: center;
         width: max-content;
+        height: 20px;
+        opacity: 1;
+
+        animation: delayDelete 0.2s;
+        animation-fill-mode: forwards;
+        animation-delay: 2s;
+
+        &:nth-child(2) {
+            animation-delay: 3s;
+        }
+        &:nth-child(3) {
+            animation-delay: 4s;
+        }
+        &:nth-child(4) {
+            animation-delay: 5s;
+        }
+        &:nth-child(5) {
+            animation-delay: 8s;
+        }
     }
     .vermillion {
         display: inline-block;
@@ -69,6 +93,17 @@
         }
         65% {
             opacity: 1;
+        }
+    }
+
+    @keyframes delayDelete {
+        from {
+            height: 20px;
+            opacity: 1;
+        }
+        to {
+            height: 0;
+            opacity: 0;
         }
     }
 </style>

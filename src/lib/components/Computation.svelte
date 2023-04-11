@@ -2,13 +2,7 @@
     export let debugOpen;
     const minAmt = 20;
     const maxAmt = 32;
-    let strings = [
-        '************',
-        '******',
-        '***************',
-        '************',
-        '***************',
-    ];
+    let strings = ['************', '******', '***************'];
     strings.forEach((str, i) => {
         setInterval(() => {
             let characters = [];
@@ -34,7 +28,7 @@
 <style>
     .computation-container {
         position: fixed;
-        bottom: 20px;
+        bottom: 35px;
         right: 30px;
         text-align: right;
         font-size: 0.8rem;
