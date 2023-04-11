@@ -23,7 +23,7 @@
                 role="tooltip"><img src={crosshair} alt="target" /></button
             >
         {/if}
-        {#if event.library}
+        {#if event.library && event.library.length > 0}
             <button
                 on:click={handleToggleLibrary}
                 class="event-icon"
