@@ -9,7 +9,7 @@
     import Footer from '$lib/components/Footer.svelte';
     import Starmap from '$lib/components/Starmap/Starmap.svelte';
 
-    let selectedLocation;
+    let selectedLocation, debugOpen;
 
     function handleLocationSelect(location) {
         selectedLocation = location;
@@ -17,11 +17,11 @@
 </script>
 
 <main>
-    <Starmap {selectedLocation} />
+    <Starmap {selectedLocation} {debugOpen} />
     <Header />
     <Timeline onLocationSelect={handleLocationSelect} />
     <Footer />
-    <Computation />
+    <Computation bind:debugOpen />
 </main>
 
 <style>

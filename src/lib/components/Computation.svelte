@@ -1,4 +1,5 @@
 <script>
+    export let debugOpen;
     const minAmt = 20;
     const maxAmt = 32;
     let strings = [
@@ -24,7 +25,9 @@
 <div class="computation-container">
     <div><strong>decrypting datastream</strong></div>
     {#each strings as str}
-        <div class="computation">{str}</div>
+        <div class="computation" on:dblclick={() => (debugOpen = !debugOpen)}>
+            {str}
+        </div>
     {/each}
 </div>
 
