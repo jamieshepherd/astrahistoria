@@ -78,6 +78,7 @@
         width: 700px;
         animation: animated 0.4s linear backwards 1;
         transition: all 0.1s;
+        z-index: 2;
     }
     h2 {
         font-size: 2.8rem;

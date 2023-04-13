@@ -9,8 +9,10 @@
     import Footer from '$lib/components/Footer.svelte';
     import Starmap from '$lib/components/Starmap/Starmap.svelte';
     import Audio from '$lib/components/Audio.svelte';
+    import GlobalPicker from '$lib/components/GlobalPicker.svelte';
 
     let selectedLocation, debugOpen;
+    let selectedMillennium = '41';
 
     function handleLocationSelect(location) {
         selectedLocation = location;
@@ -21,7 +23,8 @@
     <Starmap {selectedLocation} {debugOpen} />
     <Audio />
     <Header />
-    <Timeline onLocationSelect={handleLocationSelect} />
+    <GlobalPicker bind:selectedMillennium />
+    <Timeline {selectedMillennium} onLocationSelect={handleLocationSelect} />
     <Footer />
     <Computation bind:debugOpen />
 </main>

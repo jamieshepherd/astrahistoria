@@ -10,8 +10,7 @@
                 src={github}
                 alt="Github"
             /><a href="https://github.com/jamieshepherd/historia">open-source</a
-            >
-            , warhammer 40,000 fan site by
+            >, warhammer 40,000 fan site by
             <a href="https://jamie.sh">jamie.sh</a>
         </strong>
     </p>

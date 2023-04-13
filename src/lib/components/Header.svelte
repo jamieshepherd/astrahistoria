@@ -19,7 +19,7 @@
 <style lang="scss">
     header {
         position: absolute;
-        top: 30px;
+        top: 70px;
         left: 30px;
         user-select: none;
 

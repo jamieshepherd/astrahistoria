@@ -1,4 +1,6 @@
 <script>
+    import chevron from '$lib/assets/icons/chevron.svg';
+    import chevrons from '$lib/assets/icons/chevrons.svg';
     import point from '$lib/assets/icons/devastator.svg';
     import pointActive from '$lib/assets/icons/devastator-a.svg';
     import timeline from '$lib/assets/data/timeline.json';
@@ -6,13 +8,17 @@
     import Events from '$lib/components/Events.svelte';
     import { groupBy } from '$lib/utils/ArrayUtils.js';
 
-    export let onLocationSelect;
+    export let onLocationSelect, selectedMillennium;
     let currentYear = null;
-    let currentMillenniumIndex = [0];
-    let millennium = timeline[currentMillenniumIndex];
+    let groupedEvents = {};
+    const allYears = [...Array(1000).keys()].map((y) => (y + 1).toString());
+    let years = [];
 
-    const groupedEvents = groupBy(timeline, (e) => e.year);
-    const years = Object.keys(groupedEvents);
+    $: groupedEvents = groupBy(
+        timeline.filter((t) => t.millennium === selectedMillennium),
+        (e) => e.year
+    );
+    $: years = Object.keys(groupedEvents);
 
     function selectYear(year) {
         currentYear = year;
@@ -27,7 +33,7 @@
 {#if currentYear}
     {#key currentYear}
         <Events
-            millennium={millennium.millennium}
+            millennium={selectedMillennium}
             year={currentYear}
             events={groupedEvents[currentYear]}
             {onLocationSelect}
@@ -41,24 +47,41 @@
         <div class="timeline-line-inner" />
     </div>
 
+    <div class="timeline-button timeline-start">
+        <img src={chevrons} alt="arrow start" />
+    </div>
+    <div class="timeline-button timeline-previous">
+        <img src={chevron} alt="arrow previous" />
+    </div>
+    <div class="timeline-button timeline-next">
+        <img src={chevron} alt="arrow next" />
+    </div>
+    <div class="timeline-button timeline-end">
+        <img src={chevrons} alt="arrow end" />
+    </div>
+
     <div
         class="timeline-events"
-        use:draggable={{ axis: 'x', defaultPosition: { x: -765 * 70 + 800 } }}
+        use:draggable={{
+            axis: 'x',
+            defaultPosition: { x: 0 },
+        }}
     >
-        {#each years as year (year)}
+        {#each allYears as year}
             <div
-                class="timeline-point {currentYear && currentYear === year
-                    ? 'active'
-                    : ''}"
+                class="timeline-point {years.includes(year)
+                    ? 'has-events'
+                    : ''} {currentYear && currentYear === year ? 'active' : ''}"
                 style="left: {year * 70}px"
-                on:click={() => selectYear(year)}
+                on:click={() =>
+                    years.includes(year) ? selectYear(year) : null}
             >
                 {#if currentYear && currentYear === year}
                     <img src={pointActive} alt="Event" />
-                {:else}
+                {:else if years.includes(year)}
                     <img src={point} alt="Event" />
                 {/if}
-                <span>{year}<em>.m{millennium.millennium}</em></span>
+                <span>{year}</span>
             </div>
         {/each}
     </div>
@@ -67,15 +90,34 @@
 <style lang="scss">
     .timeline-slider {
         cursor: all-scroll;
-        height: 160px;
+        height: 60px;
         position: relative;
         margin-top: auto;
-        margin-bottom: -20px;
+
+        &:after {
+            content: '';
+            background: linear-gradient(
+                to right,
+                black,
+                rgba(0, 0, 0, 0),
+                rgba(0, 0, 0, 0),
+                rgba(0, 0, 0, 0),
+                rgba(0, 0, 0, 0),
+                rgba(0, 0, 0, 0),
+                black
+            );
+            position: absolute;
+            pointer-events: none;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
     }
 
     .timeline-events {
         position: relative;
-        height: 160px;
+        height: 60px;
         width: 70000px;
     }
 
@@ -86,7 +128,7 @@
             rgb(97, 239, 255, 1),
             rgba(97, 239, 255, 0.2)
         );
-        bottom: -140px;
+        bottom: -60px;
         height: 1px;
         box-shadow: 0 0 10px 5px rgba(97, 239, 255, 0.2);
         position: relative;
@@ -109,21 +151,24 @@
 
     .timeline-point {
         position: absolute;
-        bottom: 20px;
+        bottom: 0;
         left: 50%;
-        cursor: pointer;
         padding: 10px;
         width: 50px;
         text-align: center;
-        opacity: 0.5;
+        opacity: 1;
         transition: all 0.2s;
         transform: scale(0.75);
         user-select: none;
 
-        &.active,
-        &:hover {
-            opacity: 1;
-            transform: scale(1);
+        &.has-events {
+            cursor: pointer;
+
+            &.active,
+            &:hover {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         &.active {
@@ -150,6 +195,46 @@
             font-style: normal;
             opacity: 0.5;
         }
+    }
+
+    .timeline-button {
+        background: black;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: 5px;
+        cursor: pointer;
+        position: absolute;
+        width: 30px;
+        padding: 5px;
+        bottom: 10px;
+        z-index: 1;
+        transition: 0.2s;
+
+        &:hover {
+            border-color: rgb(97, 239, 255, 1);
+            transform: scale(1.1);
+            opacity: 1;
+        }
+    }
+
+    .timeline-start {
+        left: 30px;
+
+        img {
+            transform: rotate(180deg);
+        }
+    }
+    .timeline-previous {
+        left: 70px;
+
+        img {
+            transform: rotate(180deg);
+        }
+    }
+    .timeline-next {
+        right: 70px;
+    }
+    .timeline-end {
+        right: 30px;
     }
 
     @keyframes innerLine {

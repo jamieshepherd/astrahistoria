@@ -5,7 +5,7 @@
 
     let playing = false;
     let inited = false;
-
+    let autoplay = false;
     let audio;
 
     function playPause() {
@@ -23,7 +23,7 @@
     }
 
     document.addEventListener('click', () => {
-        if (inited === false) {
+        if (inited === false && autoplay) {
             inited = true;
             audio.play();
             playing = true;
@@ -61,7 +61,7 @@
         opacity: 0.7;
         padding: 10px;
         transition: all 0.2s;
-        z-index: 0;
+        z-index: 1;
 
         &:hover {
             opacity: 1;
