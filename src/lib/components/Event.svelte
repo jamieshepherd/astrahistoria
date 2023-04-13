@@ -56,7 +56,6 @@
     }
     .event-references {
         position: relative;
-        height: 30px;
     }
     // Note this is a little bit janky so I can use a CSS tooltip where the
     // tooltip sits on top of the content to the right. Eventually I'll
@@ -69,7 +68,7 @@
         padding: 1px;
         transition: all 0.2s;
         opacity: 0.5;
-        position: absolute;
+        position: relative;
 
         &:hover {
             transform: scale(1.2);
@@ -86,7 +85,6 @@
         }
 
         &:nth-of-type(2) {
-            left: 30px;
             z-index: 10;
         }
     }
