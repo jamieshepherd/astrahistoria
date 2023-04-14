@@ -4,11 +4,9 @@
     import point from '$lib/assets/icons/devastator.svg';
     import pointActive from '$lib/assets/icons/devastator-a.svg';
     import timeline from '$lib/assets/data/timeline.json';
-    import { draggable } from '@neodrag/svelte';
     import Events from '$lib/components/Events.svelte';
     import { groupBy } from '$lib/utils/ArrayUtils.js';
     import { useConveyer } from '@egjs/svelte-conveyer';
-    import { afterUpdate } from 'svelte';
 
     export let onLocationSelect, selectedMillennium;
     let currentYear = null;
