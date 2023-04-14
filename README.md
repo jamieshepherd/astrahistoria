@@ -58,9 +58,11 @@ Example location:
 Astra Historia was built pretty quickly as I wanted to learn Svelte and ThreeJS over a weekend. As a result - there's probably going to be a bunch of bugs, performance issues, and more. Please open PRs liberally, every little helps.
 
 ## Outstanding issues
+- Needs substantially more data, locations, and library references
 - In general, though I think the galaxy looks pretty cool - I'd love to get it as close to Warhammer 40K accurate as possible. Any help in this direction would be _greatly_ appreciated!
-- Unhappy with how camera panning works. I'm using OrbitControls out of the box, but I don't really want to pan around a target, just have the camera pan on drag, and zoom on mouse scroll or pinch.
 - There's a little too much transparency on the warp storms - and stars underneath show through. Unsure how to render this better right now.
+- The warp in general could look - frankly - a lot cooler!
+- Mobile support
 
 ## Copyright
 It's important to mention that Astra Historia is an **unofficial fan-site** for the Warhammer 40,000 universe - and all references, art, and literature related to Warhammer is © Games Workshop Limited.
