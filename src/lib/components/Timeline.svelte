@@ -8,13 +8,14 @@
     import Events from '$lib/components/Events.svelte';
     import { groupBy } from '$lib/utils/ArrayUtils.js';
     import { useConveyer } from '@egjs/svelte-conveyer';
+    import { afterUpdate } from 'svelte';
 
     export let onLocationSelect, selectedMillennium;
     let currentYear = null;
     let groupedEvents = {};
     const allYears = [...Array(1000).keys()].map((y) => (y + 1).toString());
     let years = [];
-    const { ref, scrollIntoView, scrollBy, scrollTo } = useConveyer({
+    const { ref, scrollBy, scrollTo } = useConveyer({
         horizontal: true,
         preventClickOnDrag: true,
         itemSelector: '.timeline-point',
@@ -33,6 +34,10 @@
     function handleClose() {
         selectYear(null);
         onLocationSelect(null);
+    }
+
+    $: if (selectedMillennium && ref.current) {
+        scrollTo(0, 200);
     }
 </script>
 

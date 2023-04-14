@@ -19,7 +19,7 @@
 </script>
 
 {#if year}
-    <div class="event-year" use:clickOutside>
+    <div class="event-year" use:clickOutside on:click_outside={onClose}>
         <button class="close-year" on:click={onClose}>close</button>
         <span class="title"><span class="approx" />{year}.M{millennium}</span>
         {#each eventData as event}
