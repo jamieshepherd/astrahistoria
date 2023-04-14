@@ -1,0 +1,34 @@
+{
+	"name": "astrahistoria",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"timeline": "node scripts/buildTimeline.js",
+		"dev": "npm run timeline &&vite dev",
+		"build": "npm run timeline && vite build",
+		"preview": "npm run timeline && vite preview",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch"
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-auto": "^2.0.0",
+		"@sveltejs/kit": "^1.5.0",
+		"prettier": "^2.8.7",
+		"prettier-plugin-svelte": "^2.10.0",
+		"sass": "^1.60.0",
+		"svelte": "^3.54.0",
+		"svelte-check": "^3.0.1",
+		"three": "^0.150.1",
+		"typescript": "^5.0.0",
+		"vite": "^4.2.0"
+	},
+	"type": "module",
+	"dependencies": {
+		"@egjs/svelte-conveyer": "^1.4.8",
+		"@threlte/core": "^6.0.0-next.1",
+		"@threlte/extras": "^5.0.0-next.3",
+		"microtip": "^0.2.2",
+		"postprocessing": "^6.30.1",
+		"uil": "^4.2.9"
+	}
+}
