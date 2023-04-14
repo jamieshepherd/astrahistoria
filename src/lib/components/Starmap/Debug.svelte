@@ -95,7 +95,10 @@
         });
         stormGroup
             .add(globalProperties.storm, 'scale', {
-                type: 'number',
+                type: 'slide',
+                min: 0,
+                max: 5,
+                step: 0.1,
             })
             .listen()
             .onChange((v) => (globalProperties.storm.scale = v));
@@ -111,11 +114,16 @@
         stormGroup
             .add(globalProperties.storm, 'stormColor')
             .listen()
-            .onChange((v) => (globalProperties.storm.stormColor = v));
+            .onChange(
+                (v) => (globalProperties.storm.stormColor = `#${v.slice(2)}`)
+            );
         stormGroup
             .add(globalProperties.storm, 'lightningColor')
             .listen()
-            .onChange((v) => (globalProperties.storm.lightningColor = v));
+            .onChange(
+                (v) =>
+                    (globalProperties.storm.lightningColor = `#${v.slice(2)}`)
+            );
 
         const bloomGroup = ui.add('group', {
             name: 'Bloom',
