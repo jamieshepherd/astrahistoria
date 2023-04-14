@@ -7,12 +7,18 @@
     import { draggable } from '@neodrag/svelte';
     import Events from '$lib/components/Events.svelte';
     import { groupBy } from '$lib/utils/ArrayUtils.js';
+    import { useConveyer } from '@egjs/svelte-conveyer';
 
     export let onLocationSelect, selectedMillennium;
     let currentYear = null;
     let groupedEvents = {};
     const allYears = [...Array(1000).keys()].map((y) => (y + 1).toString());
     let years = [];
+    const { ref, scrollIntoView, scrollBy, scrollTo } = useConveyer({
+        horizontal: true,
+        preventClickOnDrag: true,
+        itemSelector: '.timeline-point',
+    });
 
     $: groupedEvents = groupBy(
         timeline.filter((t) => t.millennium === selectedMillennium),
@@ -47,41 +53,48 @@
         <div class="timeline-line-inner" />
     </div>
 
-    <div class="timeline-button timeline-start">
-        <img src={chevrons} alt="arrow start" />
-    </div>
-    <div class="timeline-button timeline-previous">
-        <img src={chevron} alt="arrow previous" />
-    </div>
-    <div class="timeline-button timeline-next">
-        <img src={chevron} alt="arrow next" />
-    </div>
-    <div class="timeline-button timeline-end">
-        <img src={chevrons} alt="arrow end" />
+    <div class="buttons">
+        <div
+            class="timeline-button timeline-start"
+            on:click={() => scrollTo(0, 200)}
+        >
+            <img src={chevrons} alt="arrow start" />
+        </div>
+        <div
+            class="timeline-button timeline-previous"
+            on:click={() => scrollBy(-120 * 5, 200)}
+        >
+            <img src={chevron} alt="arrow previous" />
+        </div>
+        <div
+            class="timeline-button timeline-next"
+            on:click={() => scrollBy(120 * 5, 200)}
+        >
+            <img src={chevron} alt="arrow next" />
+        </div>
+        <div
+            class="timeline-button timeline-end"
+            on:click={() => scrollTo(120 * 1000, 200)}
+        >
+            <img src={chevrons} alt="arrow end" />
+        </div>
     </div>
 
-    <div
-        class="timeline-events"
-        use:draggable={{
-            axis: 'x',
-            defaultPosition: { x: 0 },
-        }}
-    >
-        {#each allYears as year}
+    <div class="timeline-events items horizontal" use:ref>
+        {#each allYears as year (year)}
             <div
-                class="timeline-point {years.includes(year)
+                class="item timeline-point {years.includes(year)
                     ? 'has-events'
                     : ''} {currentYear && currentYear === year ? 'active' : ''}"
-                style="left: {year * 70}px"
                 on:click={() =>
                     years.includes(year) ? selectYear(year) : null}
             >
+                <span>{year}</span>
                 {#if currentYear && currentYear === year}
                     <img src={pointActive} alt="Event" />
                 {:else if years.includes(year)}
                     <img src={point} alt="Event" />
                 {/if}
-                <span>{year}</span>
             </div>
         {/each}
     </div>
@@ -116,9 +129,22 @@
     }
 
     .timeline-events {
-        position: relative;
-        height: 60px;
-        width: 70000px;
+        //background: rgba(255, 0, 0, 0.1);
+        //position: relative;
+        //height: 60px;
+        //width: 80000px;
+        padding: 0 150px;
+        width: 100%;
+        overflow-x: scroll;
+        white-space: nowrap;
+        display: flex;
+
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
     }
 
     .timeline-line {
@@ -150,16 +176,20 @@
     }
 
     .timeline-point {
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        padding: 10px;
-        width: 50px;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        width: 120px;
         text-align: center;
         opacity: 1;
         transition: all 0.2s;
         transform: scale(0.75);
         user-select: none;
+
+        flex-basis: 70px;
+        flex-grow: 0;
+        flex-shrink: 0;
 
         &.has-events {
             cursor: pointer;
@@ -179,15 +209,13 @@
             width: 28px;
             height: 28px;
             user-select: none;
+            margin-top: 10px;
         }
 
         span {
+            display: block;
             font-size: 1.2rem;
-            position: absolute;
-            top: -15px;
-            left: -25px;
-            right: -25px;
-            text-align: center;
+            font-weight: 700;
         }
 
         em {
@@ -208,6 +236,7 @@
         bottom: 10px;
         z-index: 1;
         transition: 0.2s;
+        user-select: none;
 
         &:hover {
             border-color: rgb(97, 239, 255, 1);
