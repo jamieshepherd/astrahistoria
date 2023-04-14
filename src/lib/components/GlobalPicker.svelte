@@ -1,6 +1,5 @@
 <script>
     import { clickOutside } from '$lib/utils/clickOutside.js';
-    import { draggable } from '@neodrag/svelte';
 
     export let selectedMillennium;
     let open,
@@ -20,8 +19,6 @@
         on:click_outside={() => {
             if (!dragging) open = false;
         }}
-        on:neodrag:start={() => (dragging = true)}
-        on:neodrag:end={() => setTimeout(() => (dragging = false), 100)}
     >
         {#each mItems as m}
             <div class="mill" on:click={() => setSelectedMillennium(m)}>
