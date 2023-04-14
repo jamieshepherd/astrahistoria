@@ -9,7 +9,7 @@
     import { createGalaxy } from '$lib/utils/GalaxyUtils.js';
     import { beforeUpdate } from 'svelte';
 
-    export let selectedLocation, galaxyParams, stormParams;
+    export let selectedLocations, galaxyParams, stormParams;
 
     let bufferGeometry;
     interactivity();
@@ -52,8 +52,10 @@
     </T.Group>
 
     <T.Group position.x={-2} position.y={-0.3}>
-        {#if selectedLocation}
-            <POI {selectedLocation} />
+        {#if selectedLocations}
+            {#each selectedLocations as location (location)}
+                <POI selectedLocation={location} />
+            {/each}
         {/if}
     </T.Group>
 </T.Group>

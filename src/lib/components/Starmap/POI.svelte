@@ -4,18 +4,16 @@
     import { T, useThrelte } from '@threlte/core';
     import { LineGeometry } from 'three/addons/lines/LineGeometry.js';
     import { LineMaterial } from 'three/addons/lines/LineMaterial.js';
+    import locations from '$lib/assets/data/locations.json';
 
     export let selectedLocation;
     let locationData;
     let lineGeometry;
-    const { camera } = useThrelte();
 
     async function getData() {
-        const response = await fetch(
-            `/data/locations/${selectedLocation}.json`
-        );
-
-        locationData = await response.json();
+        console.log(locations);
+        locationData = locations.find((l) => l.key === selectedLocation);
+        console.log(locationData);
     }
 
     getData();
@@ -29,14 +27,6 @@
             (locationData.location[1] + 1) / 10,
             0,
         ]);
-    }
-
-    $: if (locationData) {
-        camera.current?.position.set(
-            locationData.location[0] / 10,
-            locationData.location[1] / 10,
-            camera.current?.position.z
-        );
     }
 </script>
 

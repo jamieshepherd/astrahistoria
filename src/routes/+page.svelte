@@ -11,16 +11,17 @@
     import Audio from '$lib/components/Audio.svelte';
     import GlobalPicker from '$lib/components/GlobalPicker.svelte';
 
-    let selectedLocation, debugOpen;
+    let selectedLocations, debugOpen;
     let selectedMillennium = '41';
 
-    function handleLocationSelect(location) {
-        selectedLocation = location;
+    function handleLocationSelect(locations) {
+        console.log('locations', locations);
+        selectedLocations = locations;
     }
 </script>
 
 <main>
-    <Starmap {selectedLocation} {debugOpen} />
+    <Starmap {selectedLocations} {debugOpen} />
     <Audio />
     <Header />
     <GlobalPicker bind:selectedMillennium />

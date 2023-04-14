@@ -4,8 +4,11 @@
 
     export let year, millennium, events, onClose, onLocationSelect;
     let eventData = [];
+    let locations = [];
 
     async function getEvents() {
+        eventData = [];
+        locations = [];
         for (const event of events) {
             const response = await fetch(
                 `/data/events/${millennium}/${year}/${event.filename}`
@@ -13,13 +16,21 @@
             eventData.push(await response.json());
         }
         eventData = [...eventData];
+        eventData.forEach((e) => {
+            console.log('event', e);
+            if (e.locations) {
+                locations = locations.concat(e.locations);
+            }
+        });
+
+        onLocationSelect([...new Set(locations)]);
     }
 
     getEvents();
 </script>
 
 {#if year}
-    <div class="event-year" use:clickOutside on:click_outside={onClose}>
+    <div class="event-year" use:clickOutside>
         <button class="close-year" on:click={onClose}>close</button>
         <span class="title"><span class="approx" />{year}.M{millennium}</span>
         {#each eventData as event}

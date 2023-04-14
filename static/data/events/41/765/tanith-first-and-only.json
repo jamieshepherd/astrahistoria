@@ -2,5 +2,5 @@
   "name": "Tanith First and Only",
   "summary": "During the Sabbat Worlds Crusade, the planet Tanith was called on to raise regiments for the Astra Militarum for the first time in its history. During the Founding ceremony, a Chaos fleet slipped through the Imperial Navy blockade - destroying the defenseless Tanith. Around 3,500 Guardsmen escaped - lead by Colonel-Commissar Ibram Gaunt - who would become the 'Tanith First and Only'.",
   "library": [9780671784102],
-  "location": "tanith"
+  "locations": ["tanith"]
 }

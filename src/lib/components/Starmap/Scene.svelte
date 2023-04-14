@@ -5,7 +5,7 @@
     import { dragControls } from '$lib/utils/DragUtils.js';
     interactivity();
 
-    export let selectedLocation, globalProperties;
+    export let selectedLocations, globalProperties;
 
     const { scene, camera, renderer } = useThrelte();
 
@@ -57,5 +57,5 @@
 <Galaxy
     galaxyParams={globalProperties.galaxy}
     stormParams={globalProperties.storm}
-    {selectedLocation}
+    {selectedLocations}
 />

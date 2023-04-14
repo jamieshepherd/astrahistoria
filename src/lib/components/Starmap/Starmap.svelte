@@ -5,14 +5,14 @@
     import Debug from '$lib/components/Starmap/Debug.svelte';
     import defaultProperties from '$lib/assets/data/default.json';
 
-    export let selectedLocation, debugOpen;
+    export let selectedLocations, debugOpen;
 
     let globalProperties = { ...defaultProperties };
 </script>
 
 <div class="starmap">
     <Canvas>
-        <Scene bind:globalProperties {selectedLocation} />
+        <Scene bind:globalProperties {selectedLocations} />
         <PostProcessing bind:globalProperties />
         <Debug bind:globalProperties {debugOpen} />
     </Canvas>

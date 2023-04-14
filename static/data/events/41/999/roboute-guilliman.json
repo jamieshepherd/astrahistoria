@@ -1,4 +1,5 @@
 {
   "name": "Roboute Guilliman Returns",
-  "summary": "Roboute Guilliman returns to lead the Imperium at the climax of the Ultramar Campaign and takes command on Terra after the Terran Crusade."
+  "summary": "Roboute Guilliman returns to lead the Imperium at the climax of the Ultramar Campaign and takes command on Terra after the Terran Crusade.",
+  "locations": ["terra"]
 }
