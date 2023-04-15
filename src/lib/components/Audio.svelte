@@ -5,7 +5,7 @@
 
     let playing = false;
     let inited = false;
-    let autoplay = false;
+    let autoplay = true;
     let audio;
 
     function playPause() {
@@ -32,7 +32,7 @@
 
     $: if (audio) {
         audio.autoplay = true;
-        audio.volume = 0.2;
+        audio.volume = 0.1;
     }
 </script>
 
