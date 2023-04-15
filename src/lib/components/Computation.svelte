@@ -25,7 +25,7 @@
     {/each}
 </div>
 
-<style>
+<style lang="scss">
     .computation-container {
         position: fixed;
         bottom: 35px;
@@ -33,5 +33,9 @@
         text-align: right;
         font-size: 0.8rem;
         user-select: none;
+
+        @media only screen and (max-width: 1000px) {
+            display: none;
+        }
     }
 </style>

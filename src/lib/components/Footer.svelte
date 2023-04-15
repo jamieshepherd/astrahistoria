@@ -27,7 +27,7 @@
     </p>
 </footer>
 
-<style>
+<style lang="scss">
     footer {
         display: block;
         font-size: 1rem;
@@ -36,6 +36,10 @@
         padding: 30px;
         width: 100%;
         user-select: none;
+
+        @media only screen and (max-width: 1000px) {
+            display: none;
+        }
     }
 
     p {
