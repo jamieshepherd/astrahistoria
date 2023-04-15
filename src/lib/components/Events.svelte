@@ -90,6 +90,12 @@
         animation: animated 0.4s linear backwards 1;
         transition: all 0.1s;
         z-index: 2;
+
+        @media only screen and (max-width: 1000px) {
+            width: auto;
+            margin: 30px;
+            max-width: 100%;
+        }
     }
     h2 {
         font-size: 2.8rem;

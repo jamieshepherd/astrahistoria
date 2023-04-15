@@ -110,6 +110,10 @@
         position: relative;
         margin-top: auto;
 
+        @media only screen and (max-width: 1000px) {
+            margin-bottom: 20px;
+        }
+
         &:after {
             content: '';
             background: linear-gradient(
